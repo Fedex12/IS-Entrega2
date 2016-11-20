@@ -39,9 +39,24 @@ public class Sistema {
         this.mensajeGanador = "Usted a ganador un sorteo por una comida gratis";
     }
 
-    public void agregarCliente(String nombre, String documento, String contacto, String mail) {
-        Cliente cliente = new Cliente(nombre, documento, contacto,mail);
-        clientes.add(cliente);
+    public Respuesta agregarCliente(String nombre, String documento, String contacto, String mail) {
+        Respuesta resp = new Respuesta(-1, "");
+        boolean existe=false;
+        for(int i=0;i<clientes.size();i++){
+            if(documento==clientes.get(i).getDocumento()){
+                existe=true;
+            }
+        }
+        if(existe){
+            resp.setCod(-1);
+            resp.setRespuesta("Error: El documento ya existe en el sistema.");
+        }else{
+            Cliente cliente = new Cliente(nombre, documento, contacto,mail);
+            clientes.add(cliente);
+            resp.setCod(0);
+            resp.setRespuesta("Se agrego cliente correctamente.");
+        }
+        return resp;
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -78,6 +93,21 @@ public class Sistema {
         return respuesta;
     }
 
+    
+        public Respuesta agregarEvaluacionAnonima(int estrellas, String comentarios) {
+        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
+        Respuesta respuesta = new Respuesta(-1, "");
+        boolean seAgrego = false;
+        if (estrellas < 1 && estrellas > 5) {
+            respuesta.setRespuesta("Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.");
+
+        } else {
+            evaluaciones.add(evaluacion);
+            respuesta.setCod(0);
+            respuesta.setRespuesta("Se agrego evalucion correctamente.");
+        }
+        return respuesta;
+    }
     public Respuesta modificarFicha(String nombre, String direccion, String horario, String tipoComida) {
         Respuesta respuesta = new Respuesta(-1, "");
         this.ficha.setNombre(nombre);

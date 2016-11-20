@@ -11,6 +11,7 @@ import clases.Ficha;
 import clases.Participante;
 import clases.Respuesta;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Sistema {
     private ArrayList<Participante> participantes;
     private ArrayList<Participante> ganadores;
     private ArrayList<Evaluacion> evaluaciones;
+    private ArrayList<String> emailEnviados;
     private Ficha ficha;
     private int cantPremios;
     private String mensajeGanador;
@@ -31,13 +33,14 @@ public class Sistema {
         this.participantes = new ArrayList<Participante>();
         this.ganadores = new ArrayList<Participante>();
         this.evaluaciones = new ArrayList<Evaluacion>();
+        this.emailEnviados= new ArrayList<String>();
         this.ficha = new Ficha();
         this.cantPremios = 1;
         this.mensajeGanador = "Usted a ganador un sorteo por una comida gratis";
     }
 
-    public void agregarCliente(String nombre, String documento, String contacto) {
-        Cliente cliente = new Cliente(nombre, documento, contacto);
+    public void agregarCliente(String nombre, String documento, String contacto, String mail) {
+        Cliente cliente = new Cliente(nombre, documento, contacto,mail);
         clientes.add(cliente);
     }
 
@@ -98,11 +101,38 @@ public class Sistema {
         }
         return respuesta;
     }
+    
+    public void enviarMail(Participante participante){
+        
+        
+        String mail="To:"+participante.getCliente().getContacto()+"\n";
+        mail=participante.getCliente().getNombre()+".\n"+mensajeGanador;
+        emailEnviados.add(mail);
+       
+    }
 
     public Respuesta sortear() {
         Respuesta respuesta = new Respuesta(-1, "");
-     
+        Random rnd = new Random();
+        String mensaje ="Los ganadores del sorteo son: \n";
+        for(int i=0;i<cantPremios;i++){
+            int random = rnd.nextInt()%participantes.size();
+            Participante ganador = participantes.get(random);
+            if(!ganadores.contains(ganador)){
+                ganadores.add(ganador);
+                mensaje+=ganador.getCliente().getNombre()+" Contacto: "+ganador.getCliente().getContacto()+" \n";
+                enviarMail(ganador);
+            }else{
+                i--;
+            }
+        }
+        respuesta.setCod(0);
+        respuesta.setRespuesta(mensaje);
+        
         return respuesta;
+        
+        
+       
     }
     
 }

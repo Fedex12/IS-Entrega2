@@ -13,19 +13,22 @@ public class Cliente {
     private String nombre;
     private String documento;
     private String contacto;
+    private String email;
 
     public Cliente() {
         this.nombre = "";
         this.documento = "";
         this.contacto = "";
+        this.email="";
     }
 
     
     
-    public Cliente(String nombre, String documento, String contacto) {
+    public Cliente(String nombre, String documento, String contacto,String mail) {
         this.nombre = nombre;
         this.documento = documento;
         this.contacto = contacto;
+        this.email=mail;
     }
 
     
@@ -53,6 +56,15 @@ public class Cliente {
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     
     
     

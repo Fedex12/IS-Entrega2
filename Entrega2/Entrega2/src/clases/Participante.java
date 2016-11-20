@@ -11,20 +11,21 @@ import java.util.ArrayList;
  *
  * @author Federico
  */
-public class Participante extends Cliente{
+public class Participante{
+    private Cliente cliente;
     private ArrayList<Evaluacion> evaluaciones;
 
     public Participante(ArrayList<Evaluacion> evaluaciones) {
         this.evaluaciones = new ArrayList<>();
     }
 
-    public Participante(String nombre, String documento, String contacto) {
-        super(nombre, documento, contacto);
+    public Participante() {
+        this.cliente= new Cliente();
         this.evaluaciones = new ArrayList<>();
     }
     
     public Participante(Cliente cliente) {
-        super(cliente.getNombre(), cliente.getDocumento(), cliente.getContacto());
+        this.cliente= cliente;
         this.evaluaciones = new ArrayList<>();
     }
     
@@ -40,6 +41,15 @@ public class Participante extends Cliente{
     public void agregarEvaluacion(Evaluacion evaluacion){
         evaluaciones.add(evaluacion);
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     
     
 }

@@ -16,10 +16,10 @@ public class Ficha {
     private String tipoComida;
     
      public Ficha() {
-        this.nombre = "";
-        this.direccion  = "";
-        this.horario = "";
-        this.tipoComida = "";
+        this.nombre = "Restaurante sin datos";
+        this.direccion  = "Sin datos";
+        this.horario = "Sin datos";
+        this.tipoComida = "Sin datos";
     }
     
     public Ficha(String nombre, String direccion, String horario, String tipoComida) {

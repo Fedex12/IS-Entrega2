@@ -15,15 +15,7 @@ public class Participante{
     private Cliente cliente;
     private ArrayList<Evaluacion> evaluaciones;
 
-    public Participante(ArrayList<Evaluacion> evaluaciones) {
-        this.evaluaciones = new ArrayList<>();
-    }
-
-    public Participante() {
-        this.cliente= new Cliente();
-        this.evaluaciones = new ArrayList<>();
-    }
-    
+  
     public Participante(Cliente cliente) {
         this.cliente= cliente;
         this.evaluaciones = new ArrayList<>();
@@ -50,6 +42,12 @@ public class Participante{
         this.cliente = cliente;
     }
     
-    
+        @Override
+    public boolean equals(Object obj) {
+         if (obj instanceof Participante) {
+         Participante participante = (Participante) obj;
+         return participante.getCliente().equals(cliente);
+         }else{return false;}
+    }
     
 }

@@ -10,68 +10,72 @@ package clases;
  * @author Federico
  */
 public class Cliente {
+
     private String nombre;
     private String documento;
     private String contacto;
     private String email;
 
-<span class="fc" id="L18">    public Cliente() {</span>
-<span class="fc" id="L19">        this.nombre = &quot;&quot;;</span>
-<span class="fc" id="L20">        this.documento = &quot;&quot;;</span>
-<span class="fc" id="L21">        this.contacto = &quot;&quot;;</span>
-<span class="fc" id="L22">        this.email=&quot;&quot;;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L19">    public Cliente() {</span>
+<span class="fc" id="L20">        this.nombre = &quot;&quot;;</span>
+<span class="fc" id="L21">        this.documento = &quot;&quot;;</span>
+<span class="fc" id="L22">        this.contacto = &quot;&quot;;</span>
+<span class="fc" id="L23">        this.email = &quot;&quot;;</span>
+<span class="fc" id="L24">    }</span>
 
-    
-    
-<span class="fc" id="L27">    public Cliente(String nombre, String documento, String contacto,String mail) {</span>
-<span class="fc" id="L28">        this.nombre = nombre;</span>
-<span class="fc" id="L29">        this.documento = documento;</span>
-<span class="fc" id="L30">        this.contacto = contacto;</span>
-<span class="fc" id="L31">        this.email=mail;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L26">    public Cliente(String nombre, String documento, String contacto, String mail) {</span>
+<span class="fc" id="L27">        this.nombre = nombre;</span>
+<span class="fc" id="L28">        this.documento = documento;</span>
+<span class="fc" id="L29">        this.contacto = contacto;</span>
+<span class="fc" id="L30">        this.email = mail;</span>
+<span class="fc" id="L31">    }</span>
 
-    
-    
     public String getNombre() {
-<span class="fc" id="L37">        return nombre;</span>
+<span class="fc" id="L34">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
-<span class="fc" id="L41">        this.nombre = nombre;</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L38">        this.nombre = nombre;</span>
+<span class="fc" id="L39">    }</span>
 
     public String getDocumento() {
-<span class="fc" id="L45">        return documento;</span>
+<span class="fc" id="L42">        return documento;</span>
     }
 
     public void setDocumento(String documento) {
-<span class="fc" id="L49">        this.documento = documento;</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L46">        this.documento = documento;</span>
+<span class="fc" id="L47">    }</span>
 
     public String getContacto() {
-<span class="fc" id="L53">        return contacto;</span>
+<span class="fc" id="L50">        return contacto;</span>
     }
 
     public void setContacto(String contacto) {
-<span class="fc" id="L57">        this.contacto = contacto;</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L54">        this.contacto = contacto;</span>
+<span class="fc" id="L55">    }</span>
 
     public String getEmail() {
-<span class="fc" id="L61">        return email;</span>
+<span class="fc" id="L58">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="fc" id="L65">        this.email = email;</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L62">        this.email = email;</span>
+<span class="fc" id="L63">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L70">        return  nombre + &quot;,&quot; + documento + &quot;,&quot; + contacto + &quot;,&quot; + email;</span>
+<span class="fc" id="L67">        return nombre + &quot;,&quot; + documento + &quot;,&quot; + contacto + &quot;,&quot; + email;</span>
     }
-    
-    
-    
-    
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (obj instanceof Cliente) {</span>
+<span class="fc" id="L73">            Cliente cliente = (Cliente) obj;</span>
+<span class="pc bpc" id="L74" title="4 of 8 branches missed.">            return nombre.equals(cliente.getNombre()) &amp;&amp; documento.equals(cliente.getDocumento()) &amp;&amp; contacto.equals(cliente.getContacto()) &amp;&amp; email.equals(cliente.getEmail());</span>
+        } else {
+<span class="nc" id="L76">            return false;</span>
+        }
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

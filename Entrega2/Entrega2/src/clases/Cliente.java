@@ -10,6 +10,7 @@ package clases;
  * @author Federico
  */
 public class Cliente {
+
     private String nombre;
     private String documento;
     private String contacto;
@@ -19,20 +20,16 @@ public class Cliente {
         this.nombre = "";
         this.documento = "";
         this.contacto = "";
-        this.email="";
+        this.email = "";
     }
 
-    
-    
-    public Cliente(String nombre, String documento, String contacto,String mail) {
+    public Cliente(String nombre, String documento, String contacto, String mail) {
         this.nombre = nombre;
         this.documento = documento;
         this.contacto = contacto;
-        this.email=mail;
+        this.email = mail;
     }
 
-    
-    
     public String getNombre() {
         return nombre;
     }
@@ -67,10 +64,17 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return  nombre + "," + documento + "," + contacto + "," + email;
+        return nombre + "," + documento + "," + contacto + "," + email;
     }
-    
-    
-    
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Cliente) {
+            Cliente cliente = (Cliente) obj;
+            return nombre.equals(cliente.getNombre()) && documento.equals(cliente.getDocumento()) && contacto.equals(cliente.getContacto()) && email.equals(cliente.getEmail());
+        } else {
+            return false;
+        }
+    }
+
 }

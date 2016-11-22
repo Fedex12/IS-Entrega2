@@ -18,13 +18,13 @@ public class Evaluacion {
 <span class="nc" id="L18">        this.comentario = &quot;&quot;;</span>
 <span class="nc" id="L19">    }</span>
 
-<span class="nc" id="L21">    public Evaluacion(int estrellas, String comentario) {</span>
-<span class="nc" id="L22">        this.estrellas = estrellas;</span>
-<span class="nc" id="L23">        this.comentario = comentario;</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L21">    public Evaluacion(int estrellas, String comentario) {</span>
+<span class="fc" id="L22">        this.estrellas = estrellas;</span>
+<span class="fc" id="L23">        this.comentario = comentario;</span>
+<span class="fc" id="L24">    }</span>
     
     public int getEstrellas() {
-<span class="nc" id="L27">        return estrellas;</span>
+<span class="fc" id="L27">        return estrellas;</span>
     }
 
     public void setEstrellas(int estrellas) {
@@ -32,12 +32,21 @@ public class Evaluacion {
 <span class="nc" id="L32">    }</span>
 
     public String getComentario() {
-<span class="nc" id="L35">        return comentario;</span>
+<span class="fc" id="L35">        return comentario;</span>
     }
 
     public void setComentario(String comentario) {
 <span class="nc" id="L39">        this.comentario = comentario;</span>
 <span class="nc" id="L40">    }</span>
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">         if (obj instanceof Evaluacion) {</span>
+<span class="fc" id="L45">         Evaluacion evaluacion = (Evaluacion) obj;</span>
+<span class="pc bpc" id="L46" title="1 of 4 branches missed.">         return evaluacion.getComentario().equals(comentario)&amp;&amp;evaluacion.getEstrellas()==estrellas;</span>
+<span class="nc" id="L47">         }else{return false;}</span>
+    }
+    
     
     
     

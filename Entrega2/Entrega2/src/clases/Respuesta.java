@@ -18,8 +18,6 @@ public class Respuesta {
         this.respuesta = respuesta;
     }
 
-    
-
     public int getCod() {
         return cod;
     }

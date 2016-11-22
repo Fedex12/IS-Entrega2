@@ -38,6 +38,15 @@ public class Evaluacion {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+         if (obj instanceof Evaluacion) {
+         Evaluacion evaluacion = (Evaluacion) obj;
+         return evaluacion.getComentario().equals(comentario)&&evaluacion.getEstrellas()==estrellas;
+         }else{return false;}
+    }
+    
     
     
     

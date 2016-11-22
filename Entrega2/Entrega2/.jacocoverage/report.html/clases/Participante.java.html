@@ -15,42 +15,40 @@ public class Participante{
     private Cliente cliente;
     private ArrayList&lt;Evaluacion&gt; evaluaciones;
 
-<span class="nc" id="L18">    public Participante(ArrayList&lt;Evaluacion&gt; evaluaciones) {</span>
-<span class="nc" id="L19">        this.evaluaciones = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L20">    }</span>
-
-<span class="nc" id="L22">    public Participante() {</span>
-<span class="nc" id="L23">        this.cliente= new Cliente();</span>
-<span class="nc" id="L24">        this.evaluaciones = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L25">    }</span>
-    
-<span class="nc" id="L27">    public Participante(Cliente cliente) {</span>
-<span class="nc" id="L28">        this.cliente= cliente;</span>
-<span class="nc" id="L29">        this.evaluaciones = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L30">    }</span>
+  
+<span class="fc" id="L19">    public Participante(Cliente cliente) {</span>
+<span class="fc" id="L20">        this.cliente= cliente;</span>
+<span class="fc" id="L21">        this.evaluaciones = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">    }</span>
     
 
     public ArrayList&lt;Evaluacion&gt; getEvaluaciones() {
-<span class="nc" id="L34">        return evaluaciones;</span>
+<span class="fc" id="L26">        return evaluaciones;</span>
     }
 
     public void setEvaluaciones(ArrayList&lt;Evaluacion&gt; evaluaciones) {
-<span class="nc" id="L38">        this.evaluaciones = evaluaciones;</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L30">        this.evaluaciones = evaluaciones;</span>
+<span class="nc" id="L31">    }</span>
     
     public void agregarEvaluacion(Evaluacion evaluacion){
-<span class="nc" id="L42">        evaluaciones.add(evaluacion);</span>
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L34">        evaluaciones.add(evaluacion);</span>
+<span class="fc" id="L35">    }</span>
 
     public Cliente getCliente() {
-<span class="nc" id="L46">        return cliente;</span>
+<span class="fc" id="L38">        return cliente;</span>
     }
 
     public void setCliente(Cliente cliente) {
-<span class="nc" id="L50">        this.cliente = cliente;</span>
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L42">        this.cliente = cliente;</span>
+<span class="nc" id="L43">    }</span>
     
-    
+        @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">         if (obj instanceof Participante) {</span>
+<span class="fc" id="L48">         Participante participante = (Participante) obj;</span>
+<span class="fc" id="L49">         return participante.getCliente().equals(cliente);</span>
+<span class="nc" id="L50">         }else{return false;}</span>
+    }
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

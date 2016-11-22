@@ -15,12 +15,12 @@ public class Ficha {
     private String horario;
     private String tipoComida;
     
-<span class="nc" id="L18">     public Ficha() {</span>
-<span class="nc" id="L19">        this.nombre = &quot;Restaurante sin datos&quot;;</span>
-<span class="nc" id="L20">        this.direccion  = &quot;Sin datos&quot;;</span>
-<span class="nc" id="L21">        this.horario = &quot;Sin datos&quot;;</span>
-<span class="nc" id="L22">        this.tipoComida = &quot;Sin datos&quot;;</span>
-<span class="nc" id="L23">    }</span>
+<span class="fc" id="L18">     public Ficha() {</span>
+<span class="fc" id="L19">        this.nombre = &quot;Restaurante sin datos&quot;;</span>
+<span class="fc" id="L20">        this.direccion  = &quot;Sin datos&quot;;</span>
+<span class="fc" id="L21">        this.horario = &quot;Sin datos&quot;;</span>
+<span class="fc" id="L22">        this.tipoComida = &quot;Sin datos&quot;;</span>
+<span class="fc" id="L23">    }</span>
     
 <span class="nc" id="L25">    public Ficha(String nombre, String direccion, String horario, String tipoComida) {</span>
 <span class="nc" id="L26">        this.nombre = nombre;</span>
@@ -34,34 +34,40 @@ public class Ficha {
     }
 
     public void setNombre(String nombre) {
-<span class="nc" id="L37">        this.nombre = nombre;</span>
-<span class="nc" id="L38">    }</span>
+<span class="fc" id="L37">        this.nombre = nombre;</span>
+<span class="fc" id="L38">    }</span>
 
     public String getDireccion() {
 <span class="nc" id="L41">        return direccion;</span>
     }
 
     public void setDireccion(String direccion) {
-<span class="nc" id="L45">        this.direccion = direccion;</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L45">        this.direccion = direccion;</span>
+<span class="fc" id="L46">    }</span>
 
     public String getHorario() {
 <span class="nc" id="L49">        return horario;</span>
     }
 
     public void setHorario(String horario) {
-<span class="nc" id="L53">        this.horario = horario;</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L53">        this.horario = horario;</span>
+<span class="fc" id="L54">    }</span>
 
     public String getTipoComida() {
 <span class="nc" id="L57">        return tipoComida;</span>
     }
 
     public void setTipoComida(String tipoComida) {
-<span class="nc" id="L61">        this.tipoComida = tipoComida;</span>
-<span class="nc" id="L62">    }</span>
+<span class="fc" id="L61">        this.tipoComida = tipoComida;</span>
+<span class="fc" id="L62">    }</span>
     
-    
+       @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">         if (obj instanceof Ficha) {</span>
+<span class="nc" id="L67">         Ficha ficha = (Ficha) obj;</span>
+<span class="nc bnc" id="L68" title="All 8 branches missed.">         return ficha.getNombre().equals(nombre)&amp;&amp;ficha.getDireccion().equals(direccion)&amp;&amp;ficha.getHorario().equals(horario) &amp;&amp; ficha.getTipoComida().equals(tipoComida);</span>
+<span class="nc" id="L69">         }else{return false;}</span>
+    }
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

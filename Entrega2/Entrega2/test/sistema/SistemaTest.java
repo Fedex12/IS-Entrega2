@@ -6,6 +6,7 @@
 package sistema;
 
 import clases.Cliente;
+import clases.Evaluacion;
 import clases.Participante;
 import clases.Respuesta;
 import java.util.ArrayList;
@@ -62,23 +63,23 @@ public class SistemaTest {
      * Test of getClientes method, of class Sistema.
      */
     @Test
-    public void testAgregarCliente() {
+    public void testExisteClienteAgregado() {
         
         Sistema instance = new Sistema();
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
         String email = "EmailCliente";
-        String expResult = nombre + "," + documento + "," + contacto + "," + email;
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
         instance.agregarCliente(nombre, documento, contacto, email);
         ArrayList<Cliente> result = instance.getClientes();
-        assertEquals(expResult, result.get(0));
+        assert(result.contains(cliente));
         // TODO review the generated test code and remove the default call to fail.
 
     }
     
       @Test
-    public void testAgregarClienteExistente() {
+    public void testAgregarClienteRepetido() {
         
         Sistema instance = new Sistema();
         String nombre = "NombreCliente";
@@ -97,35 +98,183 @@ public class SistemaTest {
      * Test of agregarEvaluacionIdentificada method, of class Sistema.
      */
     @Test
-    public void testAgregarEvaluacionIdentificada() {
-        System.out.println("agregarEvaluacionIdentificada");
-        Cliente cliente = null;
-        int estrellas = 0;
-        String comentarios = "";
+    public void testAgregarEvaluacionIdentificadaRespuestaOK() {
+       
         Sistema instance = new Sistema();
-        Respuesta expResult = null;
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        int estrellas = 3;
+        String comentarios = "ComentarioPrueba";
+        
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        instance.agregarCliente(nombre, documento, contacto, email);
+       
+        
+        int expResult = 0;
         Respuesta result = instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult, result.getCod());
+       
+        
+    }
+    @Test
+    public void testAgregarEvaluacionIdentificadaDatosIncorrectos1() {
+       
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        int estrellas = 7;
+        String comentarios = "ComentarioPrueba";
+        
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        instance.agregarCliente(nombre, documento, contacto, email);
+       
+        
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
+    }
+    @Test
+    public void testAgregarEvaluacionIdentificadaDatosIncorrectos2() {
+       
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        int estrellas = -3;
+        String comentarios = "ComentarioPrueba";
+        
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        instance.agregarCliente(nombre, documento, contacto, email);
+       
+        
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
     }
 
+        @Test
+    public void testAgregarEvaluacionIdentificadaClienteSinEvaluaciones() {
+       
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        int estrellas = 3;
+        String comentarios = "ComentarioPrueba";
+        Participante expResult;
+        
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        instance.agregarCliente(nombre, documento, contacto, email);
+        Respuesta resul=instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        
+        expResult= new Participante(cliente);
+        ArrayList<Participante> result = instance.getParticipantes();
+        assertEquals(0,resul.getCod());
+        
+        
+    }
+        @Test
+       public void testAgregarEvaluacionIdentificadaAgregarVariasEvaluacionesACliente() {
+       
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        
+        int[] estrellas = {3,4,5};
+        String[] comentarios ={"Comentario1","Comentario2","Comentario3"};
+        ArrayList<Evaluacion> expResult=new ArrayList<Evaluacion>();
+        instance.agregarCliente(nombre, documento, contacto, email);
+        
+        Cliente cliente1 = new Cliente(nombre, documento, contacto, email);
+        
+        
+        for(int i=0;i<3;i++){
+            instance.agregarEvaluacionIdentificada(cliente1, estrellas[i], comentarios[i]);
+            Evaluacion evaluacion= new Evaluacion( estrellas[i], comentarios[i]);
+            expResult.add(evaluacion);
+        }
+        ArrayList<Participante> result = instance.getParticipantes();
+        for(int i=0;i<expResult.size();i++){
+            assert(result.get(0).getEvaluaciones().contains(expResult.get(i)));
+        }
+        
+    }
+       
+        @Test
+       public void testAgregarEvaluacionAnonimaOK() {
+       
+        Sistema instance = new Sistema();
+        int estrellas = 4;
+        String comentarios = "ComentarioPrueba";
+        int expResult = 0;
+        Respuesta result = instance.agregarEvaluacionAnonima(estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
+    }   @Test
+       public void testAgregarEvaluacionAnonimaApareceCorrecta() {
+       
+        Sistema instance = new Sistema();
+        int estrellas = 4;
+        String comentarios = "ComentarioPrueba";
+        Evaluacion evaluacion=new Evaluacion(estrellas, comentarios);
+        instance.agregarEvaluacionAnonima(estrellas, comentarios);
+        ArrayList<Evaluacion> result = instance.getEvaluaciones();
+        assert(result.contains(evaluacion));
+       
+        
+    }   @Test
+       public void testAgregarEvaluacionAnonimaDatosIncorrectos1() {
+       
+        Sistema instance = new Sistema();
+        int estrellas = 7;
+        String comentarios = "ComentarioPrueba";
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionAnonima(estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
+    }   @Test
+       public void testAgregarEvaluacionAnonimaDatosIncorrectos2() {
+       
+        Sistema instance = new Sistema();
+        int estrellas = -3;
+        String comentarios = "ComentarioPrueba";
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionAnonima(estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
+    }
+    
     /**
      * Test of modificarFicha method, of class Sistema.
      */
     @Test
     public void testModificarFicha() {
-        System.out.println("modificarFicha");
-        String nombre = "";
-        String direccion = "";
-        String horario = "";
-        String tipoComida = "";
+        
+        String nombre = "NombrePrueba";
+        String direccion = "DireccionPrueba";
+        String horario = "HorarioPrueba";
+        String tipoComida = "TipoComidaPrueba";
         Sistema instance = new Sistema();
-        Respuesta expResult = null;
+        int expResult = 0;
         Respuesta result = instance.modificarFicha(nombre, direccion, horario, tipoComida);
-        assertEquals(expResult, result);
+        assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -133,15 +282,16 @@ public class SistemaTest {
      */
     @Test
     public void testDifinirSorteo() {
-        System.out.println("difinirSorteo");
-        int cantidadPremios = 0;
-        String mensaje = "";
+        
+        int cantidadPremios = 3;
+        String mensaje = "MensajePrueba";
+        int expResult = 0;
+        
         Sistema instance = new Sistema();
-        Respuesta expResult = null;
-        Respuesta result = instance.difinirSorteo(cantidadPremios, mensaje);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        Respuesta result = instance.definirSorteo(cantidadPremios, mensaje);
+        assertEquals(expResult, result.getCod());
+        
     }
 
     /**
@@ -149,26 +299,36 @@ public class SistemaTest {
      */
     @Test
     public void testEnviarMail() {
-        System.out.println("enviarMail");
-        Participante participante = null;
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+       
+        Cliente cliente= new Cliente(nombre, documento, contacto, email);
+        Participante participante = new Participante(cliente);
+        
         Sistema instance = new Sistema();
-        instance.enviarMail(participante);
+        int expResult=0;
+        Respuesta result=instance.enviarMail(participante);
+        assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of sortear method, of class Sistema.
      */
     @Test
-    public void testSortear() {
-        System.out.println("sortear");
+    public void testSortearOK() {
+        int cantidadPremios = 3;
+        String mensaje = "MensajePrueba";
         Sistema instance = new Sistema();
-        Respuesta expResult = null;
+        int expResult = 0;
+        instance.definirSorteo(cantidadPremios, mensaje);
         Respuesta result = instance.sortear();
-        assertEquals(expResult, result);
+        assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

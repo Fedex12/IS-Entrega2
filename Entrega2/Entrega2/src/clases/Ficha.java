@@ -61,6 +61,12 @@ public class Ficha {
         this.tipoComida = tipoComida;
     }
     
-    
+       @Override
+    public boolean equals(Object obj) {
+         if (obj instanceof Ficha) {
+         Ficha ficha = (Ficha) obj;
+         return ficha.getNombre().equals(nombre)&&ficha.getDireccion().equals(direccion)&&ficha.getHorario().equals(horario) && ficha.getTipoComida().equals(tipoComida);
+         }else{return false;}
+    }
     
 }

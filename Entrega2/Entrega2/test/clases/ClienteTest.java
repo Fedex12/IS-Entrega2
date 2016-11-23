@@ -120,9 +120,99 @@ public class ClienteTest {
        
     }
 
-    /**
-     * Test of setEmail method, of class Cliente.
-     */
-
+   @Test
+    public void testEqualsClientesIguales() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=true;
+        Object obj = new Cliente(nombre, documento, contacto, email);
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }   
+    
+       @Test
+    public void testEqualsClientesDistintoNombre() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=false;
+        Object obj = new Cliente(nombre+"1", documento, contacto, email);
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
+    
+           @Test
+    public void testEqualsClientesDistintoDocumento() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=false;
+        Object obj = new Cliente(nombre, documento+"1", contacto, email);
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
+           @Test
+    public void testEqualsClientesDistintoContacto() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=false;
+        Object obj = new Cliente(nombre, documento, contacto+"1", email);
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
+    
+           @Test
+    public void testEqualsClientesDistintoEmail() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=false;
+        Object obj = new Cliente(nombre, documento, contacto, email+"1");
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
+    
+           @Test
+    public void testEqualsClientesDistintoObjeto() {
+        String nombre ="Nombre";
+        String documento="Documento";
+        String contacto="Contacto";
+        String email= "email";
+        boolean expResult=false;
+        Object obj = "ObjetoDistinto";
+        Cliente cliente =new Cliente(nombre, documento, contacto, email);
+        
+        boolean result= cliente.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+    }
     
 }

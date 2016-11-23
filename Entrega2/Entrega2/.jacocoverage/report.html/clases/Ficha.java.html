@@ -22,15 +22,15 @@ public class Ficha {
 <span class="fc" id="L22">        this.tipoComida = &quot;Sin datos&quot;;</span>
 <span class="fc" id="L23">    }</span>
     
-<span class="nc" id="L25">    public Ficha(String nombre, String direccion, String horario, String tipoComida) {</span>
-<span class="nc" id="L26">        this.nombre = nombre;</span>
-<span class="nc" id="L27">        this.direccion = direccion;</span>
-<span class="nc" id="L28">        this.horario = horario;</span>
-<span class="nc" id="L29">        this.tipoComida = tipoComida;</span>
-<span class="nc" id="L30">    }</span>
+<span class="fc" id="L25">    public Ficha(String nombre, String direccion, String horario, String tipoComida) {</span>
+<span class="fc" id="L26">        this.nombre = nombre;</span>
+<span class="fc" id="L27">        this.direccion = direccion;</span>
+<span class="fc" id="L28">        this.horario = horario;</span>
+<span class="fc" id="L29">        this.tipoComida = tipoComida;</span>
+<span class="fc" id="L30">    }</span>
     
     public String getNombre() {
-<span class="nc" id="L33">        return nombre;</span>
+<span class="fc" id="L33">        return nombre;</span>
     }
 
     public void setNombre(String nombre) {
@@ -38,7 +38,7 @@ public class Ficha {
 <span class="fc" id="L38">    }</span>
 
     public String getDireccion() {
-<span class="nc" id="L41">        return direccion;</span>
+<span class="fc" id="L41">        return direccion;</span>
     }
 
     public void setDireccion(String direccion) {
@@ -46,7 +46,7 @@ public class Ficha {
 <span class="fc" id="L46">    }</span>
 
     public String getHorario() {
-<span class="nc" id="L49">        return horario;</span>
+<span class="fc" id="L49">        return horario;</span>
     }
 
     public void setHorario(String horario) {
@@ -54,7 +54,7 @@ public class Ficha {
 <span class="fc" id="L54">    }</span>
 
     public String getTipoComida() {
-<span class="nc" id="L57">        return tipoComida;</span>
+<span class="fc" id="L57">        return tipoComida;</span>
     }
 
     public void setTipoComida(String tipoComida) {
@@ -63,10 +63,10 @@ public class Ficha {
     
        @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L66" title="All 2 branches missed.">         if (obj instanceof Ficha) {</span>
-<span class="nc" id="L67">         Ficha ficha = (Ficha) obj;</span>
-<span class="nc bnc" id="L68" title="All 8 branches missed.">         return ficha.getNombre().equals(nombre)&amp;&amp;ficha.getDireccion().equals(direccion)&amp;&amp;ficha.getHorario().equals(horario) &amp;&amp; ficha.getTipoComida().equals(tipoComida);</span>
-<span class="nc" id="L69">         }else{return false;}</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">         if (obj instanceof Ficha) {</span>
+<span class="fc" id="L67">         Ficha ficha = (Ficha) obj;</span>
+<span class="fc bfc" id="L68" title="All 8 branches covered.">         return ficha.getNombre().equals(nombre)&amp;&amp;ficha.getDireccion().equals(direccion)&amp;&amp;ficha.getHorario().equals(horario) &amp;&amp; ficha.getTipoComida().equals(tipoComida);</span>
+<span class="fc" id="L69">         }else{return false;}</span>
     }
     
 }

@@ -66,6 +66,10 @@ public class Sistema {
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
+    
+     public ArrayList<Participante> getGanadores() {
+        return ganadores;
+    }
 
     public ArrayList<Evaluacion> getEvaluaciones() {
         return evaluaciones;
@@ -146,14 +150,10 @@ public class Sistema {
     public Respuesta sortear() {
         Respuesta respuesta = new Respuesta(-1, "");
         Random rnd = new Random();
-        int largo=0;
+        ganadores=new ArrayList<Participante>();
         String mensaje = "Los ganadores del sorteo son: \n";
-        if(cantPremios>participantes.size()){
-            largo=participantes.size();
-        }else{
-            largo=cantPremios;
-        }
-        for (int i = 0; i < largo; i++) {
+        
+        for (int i = 0; i < cantPremios; i++) {
             int random = rnd.nextInt() % participantes.size();
             Participante ganador = participantes.get(random);
             if (!ganadores.contains(ganador)) {
@@ -164,6 +164,7 @@ public class Sistema {
                 i--;
             }
         }
+        
         respuesta.setCod(0);
         respuesta.setRespuesta(mensaje);
 

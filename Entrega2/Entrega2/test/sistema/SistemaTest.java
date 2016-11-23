@@ -89,6 +89,7 @@ public class SistemaTest {
         int expResult = -1;
         instance.agregarCliente(nombre, documento, contacto, email);
         Respuesta result= instance.agregarCliente(nombre, documento, contacto, email);
+        System.out.println(result.getRespuesta());
         assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
 
@@ -309,7 +310,9 @@ public class SistemaTest {
         
         Sistema instance = new Sistema();
         int expResult=0;
+        
         Respuesta result=instance.enviarMail(participante);
+        
         assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
         
@@ -319,15 +322,79 @@ public class SistemaTest {
      * Test of sortear method, of class Sistema.
      */
     @Test
-    public void testSortearOK() {
-        int cantidadPremios = 3;
+    public void testSortearCorrectamente() {
+         String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente";
+        int estrellas = 3;
+        String comentarios = "ComentarioPrueba";
+        int cantidadPremios = 1;
         String mensaje = "MensajePrueba";
         Sistema instance = new Sistema();
         int expResult = 0;
+        Cliente cliente= new Cliente(nombre, documento, contacto, email);
+        instance.definirSorteo(cantidadPremios, mensaje);
+        instance.agregarCliente(nombre, documento, contacto, email);
+        instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        Respuesta result = instance.sortear();
+        assertEquals(expResult, result.getCod());
+        
+    }
+    
+    @Test
+    public void testSortearErrorNoHayParticipantes() {
+        
+        int estrellas = 3;
+        String comentarios = "ComentarioPrueba";
+        int cantidadPremios = 1;
+        String mensaje = "MensajePrueba";
+        Sistema instance = new Sistema();
+        int expResult = -1;
         instance.definirSorteo(cantidadPremios, mensaje);
         Respuesta result = instance.sortear();
         assertEquals(expResult, result.getCod());
-        // TODO review the generated test code and remove the default call to fail.
+        
+    }
+    
+    @Test
+    public void testSortearSeSorteaCorrectamenteYVerificoGanador() {
+         
+        int cantidadPremios = 5;
+        String mensaje = "MensajePrueba";
+        Sistema instance = new Sistema();
+        for(int i=1;i<6;i++){
+        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        instance.agregarEvaluacionIdentificada(cliente, i, "Comentario"+i);
+        }
+        instance.definirSorteo(cantidadPremios, mensaje);
+        instance.sortear();
+        ArrayList<Participante> participantes= instance.getParticipantes();
+        
+        ArrayList<Participante> ganadores= instance.getGanadores();
+       
+        assert(participantes.contains(ganadores.get(0)));
+        
+    }
+    
+        @Test
+    public void testSortearSeSorteanMasPremiosQueParticipantes() {
+         
+        int cantidadPremios = 10;
+        String mensaje = "MensajePrueba";
+        Sistema instance = new Sistema();
+        for(int i=1;i<6;i++){
+        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        instance.agregarEvaluacionIdentificada(cliente, i, "Comentario"+i);
+        }
+        instance.definirSorteo(cantidadPremios, mensaje);
+        Respuesta result=instance.sortear();
+        int expResult = 0;
+        
+       
+        assertEquals(expResult,result.getCod());
         
     }
     

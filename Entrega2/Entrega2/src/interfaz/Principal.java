@@ -6,6 +6,12 @@
 package interfaz;
 
 import clases.Evaluacion;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import sistema.Sistema;
 
 /**
  *
@@ -19,10 +25,13 @@ public class Principal extends javax.swing.JFrame {
     
     private static Evaluacion evaluacion;
     private static int estrellas = 0;
+    Sistema s;
     
     public Principal() {
         initComponents();
+        s = new Sistema();
         evaluacion = new Evaluacion();
+        RadioButton3.setSelected(true);
     }
 
     /**
@@ -34,35 +43,139 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TextAreaComentario = new javax.swing.JTextArea();
+        RadioButton1 = new javax.swing.JRadioButton();
+        RadioButton2 = new javax.swing.JRadioButton();
+        RadioButton3 = new javax.swing.JRadioButton();
+        RadioButton4 = new javax.swing.JRadioButton();
+        RadioButton5 = new javax.swing.JRadioButton();
+        LabelPuntuacion = new javax.swing.JLabel();
+        ButtonEnviar = new javax.swing.JButton();
+        LabelTitulo = new javax.swing.JLabel();
+        ComboBoxClientes = new javax.swing.JComboBox<>();
+        LabelCliente = new javax.swing.JLabel();
+        LabelComentario = new javax.swing.JLabel();
+        LabelMalo = new javax.swing.JLabel();
+        LabelBueno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setToolTipText("Comentario...");
-        jScrollPane1.setViewportView(jTextArea1);
+        TextAreaComentario.setColumns(20);
+        TextAreaComentario.setRows(5);
+        TextAreaComentario.setToolTipText("Comentario...");
+        jScrollPane1.setViewportView(TextAreaComentario);
+
+        buttonGroup1.add(RadioButton1);
+        RadioButton1.setText("1");
+
+        buttonGroup1.add(RadioButton2);
+        RadioButton2.setText("2");
+
+        buttonGroup1.add(RadioButton3);
+        RadioButton3.setText("3");
+
+        buttonGroup1.add(RadioButton4);
+        RadioButton4.setText("4");
+
+        buttonGroup1.add(RadioButton5);
+        RadioButton5.setText("5");
+
+        LabelPuntuacion.setText("Puntuación:");
+
+        ButtonEnviar.setText("ENVIAR");
+        ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEnviarActionPerformed(evt);
+            }
+        });
+
+        LabelTitulo.setText("Formulario para evaluar la atención obtenida en el restaurante");
+
+        ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        LabelCliente.setText("Cliente:");
+
+        LabelComentario.setText("Comentario:");
+
+        LabelMalo.setText("Malo");
+
+        LabelBueno.setText("Bueno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(ButtonEnviar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabelCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabelPuntuacion)
+                        .addGap(22, 22, 22)
+                        .addComponent(LabelMalo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RadioButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RadioButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LabelBueno))
+                    .addComponent(LabelComentario)
+                    .addComponent(LabelTitulo))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(LabelTitulo)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelCliente))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelPuntuacion)
+                    .addComponent(RadioButton1)
+                    .addComponent(RadioButton2)
+                    .addComponent(RadioButton3)
+                    .addComponent(RadioButton4)
+                    .addComponent(RadioButton5)
+                    .addComponent(LabelMalo)
+                    .addComponent(LabelBueno))
+                .addGap(18, 18, 18)
+                .addComponent(LabelComentario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addGap(18, 18, 18)
+                .addComponent(ButtonEnviar)
+                .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEnviarActionPerformed
+        estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));
+        evaluacion.setEstrellas(estrellas);
+        evaluacion.setComentario(TextAreaComentario.getText());
+        ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));
+        
+    }//GEN-LAST:event_ButtonEnviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,13 +208,37 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
-             
             }
         });
     }
+    
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonEnviar;
+    private javax.swing.JComboBox<String> ComboBoxClientes;
+    private javax.swing.JLabel LabelBueno;
+    private javax.swing.JLabel LabelCliente;
+    private javax.swing.JLabel LabelComentario;
+    private javax.swing.JLabel LabelMalo;
+    private javax.swing.JLabel LabelPuntuacion;
+    private javax.swing.JLabel LabelTitulo;
+    private javax.swing.JRadioButton RadioButton1;
+    private javax.swing.JRadioButton RadioButton2;
+    private javax.swing.JRadioButton RadioButton3;
+    private javax.swing.JRadioButton RadioButton4;
+    private javax.swing.JRadioButton RadioButton5;
+    private javax.swing.JTextArea TextAreaComentario;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

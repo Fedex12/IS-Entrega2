@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package sistema;
 
 import clases.Cliente;
@@ -15,6 +15,13 @@ import java.util.Random;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 /**
@@ -22,7 +29,7 @@ import java.util.regex.Pattern;
  * @author Federico
  */
 public class Sistema {
-
+    
     private ArrayList<Cliente> clientes;
     private ArrayList<Participante> participantes;
     private ArrayList<Participante> ganadores;
@@ -31,7 +38,7 @@ public class Sistema {
     private Ficha ficha;
     private int cantPremios;
     private String mensajeGanador;
-
+    
     public Sistema() {
         this.clientes = new ArrayList<Cliente>();
         this.participantes = new ArrayList<Participante>();
@@ -40,13 +47,13 @@ public class Sistema {
         this.emailEnviados = new ArrayList<String>();
         this.ficha = new Ficha();
         this.cantPremios = 2;
-        this.mensajeGanador = "Usted a ganador un sorteo por una comida gratis";
+        this.mensajeGanador = "Usted ha resultado ganador de un sorteo por una comida gratis.";
     }
-
-
     
     
-
+    
+    
+    
     public Respuesta agregarCliente(String nombre, String documento, String contacto, String email) {
         Respuesta respuesta = new Respuesta(-1, "");
         /**
@@ -56,12 +63,12 @@ public class Sistema {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-
+        
         if (nombre.isEmpty()) {
             /**
              * Si el campo nombre esta vacio respondo error.
              */
-            respuesta = new Respuesta(-1, "El mail no puede estar vacio.");
+            respuesta = new Respuesta(-1, "El mail no puede estar vacío.");
         } else if (!matcher.matches()) {
             /**
              * Si el email no tiene el formato correcto respondo error
@@ -91,7 +98,7 @@ public class Sistema {
                 Cliente cliente = new Cliente(nombre, documento, contacto, email);
                 clientes.add(cliente);
                 respuesta.setCod(0);
-                respuesta.setRespuesta("Se agrego cliente correctamente.");
+                respuesta.setRespuesta("Se agregó el cliente correctamente.");
             }
         }
         return respuesta;
@@ -99,13 +106,13 @@ public class Sistema {
     
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
         Respuesta respuesta = new Respuesta(-1, "");
-
+        
         Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
         if (estrellas >= 1 && estrellas <= 5) {
             /**
              * Si la cantidad de estrella esta dentro del rango 1-5
              */
-
+            
             Participante participante = new Participante(cliente);
             /**
              * creo un Participante a partir del cliente
@@ -118,41 +125,45 @@ public class Sistema {
                  */
                 int indice = participantes.indexOf(participante);
                 participantes.get(indice).agregarEvaluacion(evaluacion);
-
+                
                 respuesta.setCod(0);
-                respuesta.setRespuesta("Se agrego la evaluacion correspondiente a participante " + participantes.get(indice).getCliente().getNombre());
+                respuesta.setRespuesta("Se agregó la evaluación correspondiente"
+                        + " a participante " + participantes.get(indice).getCliente().getNombre());
             } else if (clientes.contains(cliente)) {
                 
                 evaluaciones.add(evaluacion);
                 if (comentarios.trim().isEmpty()) {
                     /** Si la reseña esta vacia no lo agrego a los participantes.*/
                     respuesta.setCod(0);
-                    respuesta.setRespuesta("Se agrego evaluacion, ya que esta no tiene comentarios no califica para el sorteo.");
-
+                    respuesta.setRespuesta("Se agregó evaluación, ya que esta no"
+                            + " tiene comentarios no califica para el sorteo.");
+                    
                 } else {
                     /**
-                    * Si el Participante no tiene ninguna evaluacion previa, le
-                    * agrego la evaluacion y los agrego a mi lista.
-                    */
+                     * Si el Participante no tiene ninguna evaluacion previa, le
+                     * agrego la evaluacion y los agrego a mi lista.
+                     */
                     participante.agregarEvaluacion(evaluacion);
                     participantes.add(participante);
                     respuesta.setCod(0);
-                    respuesta.setRespuesta("Evaluacion agregada, se agrego al cliente entre los participantes del sorteo");
+                    respuesta.setRespuesta("Evaluación agregada, se agregó al "
+                            + "cliente a la lista de participantes del sorteo");
                 }
             } else {
                 respuesta.setCod(-1);
                 respuesta.setRespuesta("Error: El cliente no esta registrado.");
             }
-
+            
         } else {
             /**
              * Si las estrella estan fuera del rango 1-5, respondo Error
              */
-            respuesta = new Respuesta(-1, "Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.");
+            respuesta = new Respuesta(-1, "Cantidad de estrellas no válida, debe"
+                    + " de estar comprendida entre 1 y 5.");
         }
         return respuesta;
     }
-
+    
     public Respuesta agregarEvaluacionAnonima(int estrellas, String comentarios) {
         Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
         Respuesta respuesta = new Respuesta(-1, "");
@@ -166,16 +177,16 @@ public class Sistema {
              * Si todo esta bien agrego la evaluacion a mi lista
              */
             respuesta.setCod(0);
-            respuesta.setRespuesta("Se agrego evalucion correctamente.");
+            respuesta.setRespuesta("Se agregó evaluación correctamente.");
         } else {
             /**
              * Si las estrella estan fuera del rango 1-5, respondo Error
              */
-            respuesta.setRespuesta("Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.");
+            respuesta.setRespuesta("Cantidad de estrellas no válida, debe de estar comprendida entre 1 y 5.");
         }
         return respuesta;
     }
-
+    
     public Respuesta setFicha(String nombre, String direccion, String horario, String tipoComida) {
         Respuesta respuesta = new Respuesta(-1, "");
         /**
@@ -187,18 +198,18 @@ public class Sistema {
         this.ficha.setHorario(horario);
         this.ficha.setTipoComida(tipoComida);
         respuesta.setCod(0);
-        respuesta.setRespuesta("Se modifico Ficha correctamente");
+        respuesta.setRespuesta("Se modificó Ficha correctamente");
         return respuesta;
     }
-
+    
     public Ficha getFicha() {
         return ficha;
     }
     
     
-
+    
     public Respuesta definirSorteo(int cantidadPremios, String mensaje) {
-
+        
         Respuesta respuesta = new Respuesta(-1, "");
         if (cantidadPremios <= 0) {
             /**
@@ -209,7 +220,7 @@ public class Sistema {
             /**
              * Si el mensaje tiene menos de 20 caracteres
              */
-            respuesta = new Respuesta(-1, "El mensaje debe contener por lo menos 20 caracteres");
+            respuesta = new Respuesta(-1, "El mensaje debe contener por lo menos 20 caracteres.");
         } else {
             /**
              * Si todo es correcto
@@ -218,11 +229,11 @@ public class Sistema {
             this.setCantPremios(cantidadPremios);
             System.out.println("Despues " + this.getCantPremios() + " - " + cantidadPremios);
             this.mensajeGanador = mensaje;
-            respuesta = new Respuesta(0, "Se modifico ficha correctamente.");
+            respuesta = new Respuesta(0, "Se modificó ficha correctamente.");
         }
         return respuesta;
     }
-
+    
     public Respuesta enviarMail(Participante participante) {
         Respuesta respuesta = new Respuesta(0, "");
         String mail = "To:" + participante.getCliente().getContacto() + "\n";
@@ -233,39 +244,40 @@ public class Sistema {
          */
         final String username = "ingenieriasoftwareort@gmail.com";
         final String password = "Hola1234";
-
+        
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        /*
-         Session session = Session.getInstance(props,
-         new javax.mail.Authenticator() {
-         protected PasswordAuthentication getPasswordAuthentication() {
-         return new PasswordAuthentication(username, password);
-         }
-         });
         
-         try {
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        
+        try {
             
-         Message message = new MimeMessage(session);
-         message.setFrom(new InternetAddress(username));  
-         message.setRecipients(Message.RecipientType.TO,
-         InternetAddress.parse(participante.getCliente().getEmail()));
-         message.setSubject("Ganador del sorteo");
-         message.setText(mail);
-         Transport.send(message);
-         respuesta = new Respuesta(0, "Se envio mail correctamente.");
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(participante.getCliente().getEmail()));
+            message.setSubject("Ganador del sorteo");
+            message.setText(mail);
+            Transport.send(message);
+            respuesta = new Respuesta(0, "Se envió el mail correctamente.");
             
-         } catch (MessagingException e) {
-         respuesta = new Respuesta(-1, "Error al enviar el mail");
-         throw new RuntimeException(e);
-         }
-         */
+        } catch (MessagingException e) {
+            respuesta = new Respuesta(-1, "Error al enviar el mail.");
+            throw new RuntimeException(e);
+        }
+        
         return respuesta;
     }
-
+    
     public Respuesta sortear() {
         Respuesta respuesta = new Respuesta(-1, "");
         Random rnd = new Random();
@@ -274,7 +286,7 @@ public class Sistema {
          * limpio mi lista de ganadores
          */
         String mensaje = "Los ganadores del sorteo son: \n";
-
+        
         if (this.getCantPremios() > participantes.size()) {
             /**
              * Si la cantidad de premios es mas grande que los participantes le
@@ -284,7 +296,7 @@ public class Sistema {
                 ganadores.add(participantes.get(i));
                 mensaje += participantes.get(i).getCliente().getNombre() + " Contacto: " + participantes.get(i).getCliente().getContacto() + " \n";
                 enviarMail(participantes.get(i));
-
+                
             }
         } else {
             /**
@@ -316,41 +328,41 @@ public class Sistema {
         System.out.println("En el sorteo:"+this.getCantPremios() + " - " + participantes.size());
         respuesta.setCod(0);
         respuesta.setRespuesta(mensaje + this.getCantPremios() + " " + participantes.size());
-
+        
         return respuesta;
-
+        
     }
-
+    
     
     
     public int getCantPremios() {
         return cantPremios;
     }
-
+    
     public void setCantPremios(int cantidadPremios) {
         this.cantPremios = cantidadPremios;
     }
-
+    
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
     
-     public void setFicha(Ficha ficha) {
+    public void setFicha(Ficha ficha) {
         this.ficha = ficha;
     }
     public void setClientes(ArrayList<Cliente> clientes) {
         this.clientes = clientes;
     }
     
-
+    
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
-        
-     public void setParticipantes(ArrayList<Participante> participantes) {
+    
+    public void setParticipantes(ArrayList<Participante> participantes) {
         this.participantes = participantes;
     }
-
+    
     public ArrayList<Participante> getGanadores() {
         return ganadores;
     }
@@ -358,38 +370,38 @@ public class Sistema {
     public void setGanadores(ArrayList<Participante> ganadores) {
         this.ganadores = ganadores;
     }
-
-
+    
+    
     public ArrayList<Evaluacion> getEvaluaciones() {
         return evaluaciones;
     }
-
+    
     public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
         this.evaluaciones = evaluaciones;
     }
     
     
-     public ArrayList<String> getEmailEnviados() {
+    public ArrayList<String> getEmailEnviados() {
         return emailEnviados;
     }
-
+    
     public void setEmailEnviados(ArrayList<String> emailEnviados) {
         this.emailEnviados = emailEnviados;
     }
-
+    
     public String getMensajeGanador() {
         return mensajeGanador;
     }
-
+    
     public void setMensajeGanador(String mensajeGanador) {
         this.mensajeGanador = mensajeGanador;
     }
-
-   
-
-   
-     
     
-
+    
+    
+    
+    
+    
+    
     
 }

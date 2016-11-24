@@ -253,7 +253,7 @@ java.awt.EventQueue.invokeLater(new Runnable() {
     
     public void populateData(){
 //Precarga de datos
-s.agregarCliente("Juan Pablo Gonzalez", "91827364", "098605049", "jpgonzalez@gmail.com");
+s.agregarCliente("Juan Pablo Gonzalez", "91827364", "098605049", "jpgonzab@gmail.com");
 s.agregarCliente("Federico Abreu", "12345678", "09626771", "fabreu@gmail.com");
 s.agregarCliente("Adrian Perez", "876544321", "094324758", "aperez@outlook.com");
     }

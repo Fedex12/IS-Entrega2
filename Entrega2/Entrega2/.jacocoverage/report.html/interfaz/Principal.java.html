@@ -14,6 +14,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
 
@@ -28,24 +29,22 @@ public class Principal extends javax.swing.JFrame {
      */
     
     private static Evaluacion evaluacion;
-<span class="nc" id="L31">    private static int estrellas = 0;</span>
-    Sistema s;
+<span class="nc" id="L32">    private static int estrellas = 0;</span>
+    private static Sistema s;
     
-<span class="nc" id="L34">    public Principal() {</span>
-<span class="nc" id="L35">        initComponents();</span>
-<span class="nc" id="L36">        s = new Sistema();</span>
-<span class="nc" id="L37">        s = new Sistema();</span>
-<span class="nc" id="L38">        evaluacion = new Evaluacion();</span>
-        
-        //Se precargan datos
-<span class="nc" id="L41">        populateData();</span>
+<span class="nc" id="L35">    public Principal(Sistema sis) {</span>
+<span class="nc" id="L36">        initComponents();</span>
+<span class="nc" id="L37">        this.s = sis;</span>
+<span class="nc" id="L38">        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L39">        evaluacion = new Evaluacion();</span>
+       
         
         //Inicialización del Combobox de clientes con uno vacío al principio
-<span class="nc" id="L44">        ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));</span>
-<span class="nc" id="L45">        ComboBoxClientes.insertItemAt(&quot;------&quot;,0);</span>
-<span class="nc" id="L46">        RadioButton3.setSelected(true);</span>
-<span class="nc" id="L47">        ComboBoxClientes.setSelectedIndex(0);</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L43">        ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));</span>
+<span class="nc" id="L44">        ComboBoxClientes.insertItemAt(&quot;------&quot;,0);</span>
+<span class="nc" id="L45">        RadioButton3.setSelected(true);</span>
+<span class="nc" id="L46">        ComboBoxClientes.setSelectedIndex(0);</span>
+<span class="nc" id="L47">    }</span>
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,182 +55,150 @@ public class Principal extends javax.swing.JFrame {
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<span class="nc" id="L59">        buttonGroup1 = new javax.swing.ButtonGroup();</span>
-<span class="nc" id="L60">        jPanel1 = new javax.swing.JPanel();</span>
-<span class="nc" id="L61">        LabelTitulo = new javax.swing.JLabel();</span>
-<span class="nc" id="L62">        ComboBoxClientes = new javax.swing.JComboBox&lt;&gt;();</span>
-<span class="nc" id="L63">        LabelCliente = new javax.swing.JLabel();</span>
-<span class="nc" id="L64">        LabelComentario = new javax.swing.JLabel();</span>
-<span class="nc" id="L65">        LabelMalo = new javax.swing.JLabel();</span>
-<span class="nc" id="L66">        LabelExcelente = new javax.swing.JLabel();</span>
-<span class="nc" id="L67">        jScrollPane1 = new javax.swing.JScrollPane();</span>
-<span class="nc" id="L68">        TextAreaComentario = new javax.swing.JTextArea();</span>
-<span class="nc" id="L69">        RadioButton1 = new javax.swing.JRadioButton();</span>
-<span class="nc" id="L70">        RadioButton2 = new javax.swing.JRadioButton();</span>
-<span class="nc" id="L71">        RadioButton3 = new javax.swing.JRadioButton();</span>
-<span class="nc" id="L72">        RadioButton4 = new javax.swing.JRadioButton();</span>
-<span class="nc" id="L73">        RadioButton5 = new javax.swing.JRadioButton();</span>
-<span class="nc" id="L74">        LabelPuntuacion = new javax.swing.JLabel();</span>
-<span class="nc" id="L75">        BotonEnviar = new javax.swing.JButton();</span>
-<span class="nc" id="L76">        jMenuBar2 = new javax.swing.JMenuBar();</span>
-<span class="nc" id="L77">        MenuOpciones = new javax.swing.JMenu();</span>
-<span class="nc" id="L78">        MenuItemSortear = new javax.swing.JMenuItem();</span>
-<span class="nc" id="L79">        MenuItemSalir = new javax.swing.JMenuItem();</span>
+<span class="nc" id="L58">        buttonGroup1 = new javax.swing.ButtonGroup();</span>
+<span class="nc" id="L59">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L60">        LabelTitulo = new javax.swing.JLabel();</span>
+<span class="nc" id="L61">        ComboBoxClientes = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L62">        LabelCliente = new javax.swing.JLabel();</span>
+<span class="nc" id="L63">        LabelComentario = new javax.swing.JLabel();</span>
+<span class="nc" id="L64">        LabelMalo = new javax.swing.JLabel();</span>
+<span class="nc" id="L65">        LabelExcelente = new javax.swing.JLabel();</span>
+<span class="nc" id="L66">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L67">        TextAreaComentario = new javax.swing.JTextArea();</span>
+<span class="nc" id="L68">        RadioButton1 = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L69">        RadioButton2 = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L70">        RadioButton3 = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L71">        RadioButton4 = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L72">        RadioButton5 = new javax.swing.JRadioButton();</span>
+<span class="nc" id="L73">        LabelPuntuacion = new javax.swing.JLabel();</span>
+<span class="nc" id="L74">        BotonEnviar = new javax.swing.JButton();</span>
+<span class="nc" id="L75">        BotonNuevoCli = new javax.swing.JButton();</span>
 
-<span class="nc" id="L81">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L77">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
 
-<span class="nc" id="L83">        jPanel1.setLayout(null);</span>
+<span class="nc" id="L79">        jPanel1.setLayout(null);</span>
 
-<span class="nc" id="L85">        LabelTitulo.setText(&quot;Formulario para evaluar la atención obtenida en el restaurante&quot;);</span>
-<span class="nc" id="L86">        jPanel1.add(LabelTitulo);</span>
-<span class="nc" id="L87">        LabelTitulo.setBounds(120, 60, 359, 16);</span>
+<span class="nc" id="L81">        LabelTitulo.setText(&quot;Formulario para evaluar la atención obtenida en el restaurante&quot;);</span>
+<span class="nc" id="L82">        jPanel1.add(LabelTitulo);</span>
+<span class="nc" id="L83">        LabelTitulo.setBounds(120, 60, 359, 16);</span>
 
-<span class="nc" id="L89">        ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; }));</span>
-<span class="nc" id="L90">        jPanel1.add(ComboBoxClientes);</span>
-<span class="nc" id="L91">        ComboBoxClientes.setBounds(160, 110, 64, 22);</span>
+<span class="nc" id="L85">        ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; }));</span>
+<span class="nc" id="L86">        jPanel1.add(ComboBoxClientes);</span>
+<span class="nc" id="L87">        ComboBoxClientes.setBounds(160, 110, 64, 22);</span>
 
-<span class="nc" id="L93">        LabelCliente.setText(&quot;Cliente:&quot;);</span>
-<span class="nc" id="L94">        jPanel1.add(LabelCliente);</span>
-<span class="nc" id="L95">        LabelCliente.setBounds(80, 120, 44, 16);</span>
+<span class="nc" id="L89">        LabelCliente.setText(&quot;Cliente:&quot;);</span>
+<span class="nc" id="L90">        jPanel1.add(LabelCliente);</span>
+<span class="nc" id="L91">        LabelCliente.setBounds(80, 120, 44, 16);</span>
 
-<span class="nc" id="L97">        LabelComentario.setText(&quot;Comentario:&quot;);</span>
-<span class="nc" id="L98">        jPanel1.add(LabelComentario);</span>
-<span class="nc" id="L99">        LabelComentario.setBounds(60, 200, 71, 16);</span>
+<span class="nc" id="L93">        LabelComentario.setText(&quot;Comentario:&quot;);</span>
+<span class="nc" id="L94">        jPanel1.add(LabelComentario);</span>
+<span class="nc" id="L95">        LabelComentario.setBounds(60, 200, 71, 16);</span>
 
-<span class="nc" id="L101">        LabelMalo.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
-<span class="nc" id="L102">        LabelMalo.setText(&quot;Malo&quot;);</span>
-<span class="nc" id="L103">        jPanel1.add(LabelMalo);</span>
-<span class="nc" id="L104">        LabelMalo.setBounds(160, 150, 40, 22);</span>
+<span class="nc" id="L97">        LabelMalo.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L98">        LabelMalo.setText(&quot;Malo&quot;);</span>
+<span class="nc" id="L99">        jPanel1.add(LabelMalo);</span>
+<span class="nc" id="L100">        LabelMalo.setBounds(160, 150, 40, 22);</span>
 
-<span class="nc" id="L106">        LabelExcelente.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
-<span class="nc" id="L107">        LabelExcelente.setText(&quot;Excelente&quot;);</span>
-<span class="nc" id="L108">        jPanel1.add(LabelExcelente);</span>
-<span class="nc" id="L109">        LabelExcelente.setBounds(420, 150, 90, 22);</span>
+<span class="nc" id="L102">        LabelExcelente.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L103">        LabelExcelente.setText(&quot;Excelente&quot;);</span>
+<span class="nc" id="L104">        jPanel1.add(LabelExcelente);</span>
+<span class="nc" id="L105">        LabelExcelente.setBounds(420, 150, 90, 22);</span>
 
-<span class="nc" id="L111">        TextAreaComentario.setColumns(20);</span>
-<span class="nc" id="L112">        TextAreaComentario.setRows(5);</span>
-<span class="nc" id="L113">        TextAreaComentario.setToolTipText(&quot;Comentario...&quot;);</span>
-<span class="nc" id="L114">        jScrollPane1.setViewportView(TextAreaComentario);</span>
+<span class="nc" id="L107">        TextAreaComentario.setColumns(20);</span>
+<span class="nc" id="L108">        TextAreaComentario.setRows(5);</span>
+<span class="nc" id="L109">        TextAreaComentario.setToolTipText(&quot;Comentario...&quot;);</span>
+<span class="nc" id="L110">        jScrollPane1.setViewportView(TextAreaComentario);</span>
 
-<span class="nc" id="L116">        jPanel1.add(jScrollPane1);</span>
-<span class="nc" id="L117">        jScrollPane1.setBounds(50, 230, 640, 173);</span>
+<span class="nc" id="L112">        jPanel1.add(jScrollPane1);</span>
+<span class="nc" id="L113">        jScrollPane1.setBounds(50, 230, 640, 173);</span>
 
-<span class="nc" id="L119">        buttonGroup1.add(RadioButton1);</span>
-<span class="nc" id="L120">        RadioButton1.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
-<span class="nc" id="L121">        RadioButton1.setText(&quot;1&quot;);</span>
-<span class="nc" id="L122">        jPanel1.add(RadioButton1);</span>
-<span class="nc" id="L123">        RadioButton1.setBounds(200, 150, 40, 25);</span>
+<span class="nc" id="L115">        buttonGroup1.add(RadioButton1);</span>
+<span class="nc" id="L116">        RadioButton1.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L117">        RadioButton1.setText(&quot;1&quot;);</span>
+<span class="nc" id="L118">        jPanel1.add(RadioButton1);</span>
+<span class="nc" id="L119">        RadioButton1.setBounds(200, 150, 40, 25);</span>
 
-<span class="nc" id="L125">        buttonGroup1.add(RadioButton2);</span>
-<span class="nc" id="L126">        RadioButton2.setText(&quot;2&quot;);</span>
-<span class="nc" id="L127">        jPanel1.add(RadioButton2);</span>
-<span class="nc" id="L128">        RadioButton2.setBounds(250, 150, 35, 25);</span>
+<span class="nc" id="L121">        buttonGroup1.add(RadioButton2);</span>
+<span class="nc" id="L122">        RadioButton2.setText(&quot;2&quot;);</span>
+<span class="nc" id="L123">        jPanel1.add(RadioButton2);</span>
+<span class="nc" id="L124">        RadioButton2.setBounds(250, 150, 35, 25);</span>
 
-<span class="nc" id="L130">        buttonGroup1.add(RadioButton3);</span>
-<span class="nc" id="L131">        RadioButton3.setText(&quot;3&quot;);</span>
-<span class="nc" id="L132">        jPanel1.add(RadioButton3);</span>
-<span class="nc" id="L133">        RadioButton3.setBounds(290, 150, 35, 25);</span>
+<span class="nc" id="L126">        buttonGroup1.add(RadioButton3);</span>
+<span class="nc" id="L127">        RadioButton3.setText(&quot;3&quot;);</span>
+<span class="nc" id="L128">        jPanel1.add(RadioButton3);</span>
+<span class="nc" id="L129">        RadioButton3.setBounds(290, 150, 35, 25);</span>
 
-<span class="nc" id="L135">        buttonGroup1.add(RadioButton4);</span>
-<span class="nc" id="L136">        RadioButton4.setText(&quot;4&quot;);</span>
-<span class="nc" id="L137">        jPanel1.add(RadioButton4);</span>
-<span class="nc" id="L138">        RadioButton4.setBounds(330, 150, 35, 25);</span>
+<span class="nc" id="L131">        buttonGroup1.add(RadioButton4);</span>
+<span class="nc" id="L132">        RadioButton4.setText(&quot;4&quot;);</span>
+<span class="nc" id="L133">        jPanel1.add(RadioButton4);</span>
+<span class="nc" id="L134">        RadioButton4.setBounds(330, 150, 35, 25);</span>
 
-<span class="nc" id="L140">        buttonGroup1.add(RadioButton5);</span>
-<span class="nc" id="L141">        RadioButton5.setText(&quot;5&quot;);</span>
-<span class="nc" id="L142">        jPanel1.add(RadioButton5);</span>
-<span class="nc" id="L143">        RadioButton5.setBounds(370, 150, 35, 25);</span>
+<span class="nc" id="L136">        buttonGroup1.add(RadioButton5);</span>
+<span class="nc" id="L137">        RadioButton5.setText(&quot;5&quot;);</span>
+<span class="nc" id="L138">        jPanel1.add(RadioButton5);</span>
+<span class="nc" id="L139">        RadioButton5.setBounds(370, 150, 35, 25);</span>
 
-<span class="nc" id="L145">        LabelPuntuacion.setText(&quot;Puntuación:&quot;);</span>
-<span class="nc" id="L146">        jPanel1.add(LabelPuntuacion);</span>
-<span class="nc" id="L147">        LabelPuntuacion.setBounds(60, 150, 67, 16);</span>
+<span class="nc" id="L141">        LabelPuntuacion.setText(&quot;Puntuación:&quot;);</span>
+<span class="nc" id="L142">        jPanel1.add(LabelPuntuacion);</span>
+<span class="nc" id="L143">        LabelPuntuacion.setBounds(60, 150, 67, 16);</span>
 
-<span class="nc" id="L149">        BotonEnviar.setText(&quot;ENVIAR&quot;);</span>
-<span class="nc" id="L150">        BotonEnviar.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L145">        BotonEnviar.setText(&quot;ENVIAR&quot;);</span>
+<span class="nc" id="L146">        BotonEnviar.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L152">                BotonEnviarActionPerformed(evt);</span>
-<span class="nc" id="L153">            }</span>
+<span class="nc" id="L148">                BotonEnviarActionPerformed(evt);</span>
+<span class="nc" id="L149">            }</span>
         });
-<span class="nc" id="L155">        jPanel1.add(BotonEnviar);</span>
-<span class="nc" id="L156">        BotonEnviar.setBounds(230, 430, 290, 60);</span>
+<span class="nc" id="L151">        jPanel1.add(BotonEnviar);</span>
+<span class="nc" id="L152">        BotonEnviar.setBounds(230, 430, 290, 60);</span>
 
-<span class="nc" id="L158">        MenuOpciones.setText(&quot;Opciones&quot;);</span>
-
-<span class="nc" id="L160">        MenuItemSortear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));</span>
-<span class="nc" id="L161">        MenuItemSortear.setText(&quot;Sortear&quot;);</span>
-<span class="nc" id="L162">        MenuItemSortear.addActionListener(new java.awt.event.ActionListener() {</span>
+<span class="nc" id="L154">        BotonNuevoCli.setText(&quot;+&quot;);</span>
+<span class="nc" id="L155">        BotonNuevoCli.addActionListener(new java.awt.event.ActionListener() {</span>
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L164">                MenuItemSortearActionPerformed(evt);</span>
-<span class="nc" id="L165">            }</span>
+<span class="nc" id="L157">                BotonNuevoCliActionPerformed(evt);</span>
+<span class="nc" id="L158">            }</span>
         });
-<span class="nc" id="L167">        MenuOpciones.add(MenuItemSortear);</span>
+<span class="nc" id="L160">        jPanel1.add(BotonNuevoCli);</span>
+<span class="nc" id="L161">        BotonNuevoCli.setBounds(250, 110, 40, 25);</span>
 
-<span class="nc" id="L169">        MenuItemSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));</span>
-<span class="nc" id="L170">        MenuItemSalir.setText(&quot;Salir&quot;);</span>
-<span class="nc" id="L171">        MenuItemSalir.addActionListener(new java.awt.event.ActionListener() {</span>
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-<span class="nc" id="L173">                MenuItemSalirActionPerformed(evt);</span>
-<span class="nc" id="L174">            }</span>
-        });
-<span class="nc" id="L176">        MenuOpciones.add(MenuItemSalir);</span>
-
-<span class="nc" id="L178">        jMenuBar2.add(MenuOpciones);</span>
-
-<span class="nc" id="L180">        setJMenuBar(jMenuBar2);</span>
-
-<span class="nc" id="L182">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
-<span class="nc" id="L183">        getContentPane().setLayout(layout);</span>
-<span class="nc" id="L184">        layout.setHorizontalGroup(</span>
-<span class="nc" id="L185">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L186">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
-<span class="nc" id="L187">                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)</span>
-<span class="nc" id="L188">                .addGap(0, 0, 0))</span>
+<span class="nc" id="L163">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L164">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L165">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L166">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L167">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
+<span class="nc" id="L168">                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)</span>
+<span class="nc" id="L169">                .addGap(0, 0, 0))</span>
         );
-<span class="nc" id="L190">        layout.setVerticalGroup(</span>
-<span class="nc" id="L191">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
-<span class="nc" id="L192">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
-<span class="nc" id="L193">                .addGap(0, 2, Short.MAX_VALUE)</span>
-<span class="nc" id="L194">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L171">        layout.setVerticalGroup(</span>
+<span class="nc" id="L172">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L173">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
+<span class="nc" id="L174">                .addGap(0, 28, Short.MAX_VALUE)</span>
+<span class="nc" id="L175">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
         );
 
-<span class="nc" id="L197">        pack();</span>
-<span class="nc" id="L198">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
-
-    private void MenuItemSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSortearActionPerformed
-<span class="nc" id="L201">        new Sortear(s).setVisible(true);</span>
-<span class="nc" id="L202">    }//GEN-LAST:event_MenuItemSortearActionPerformed</span>
-
-    private void MenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSalirActionPerformed
-        //Mensaje a mostrar al querer salir del sistema
-<span class="nc" id="L206">        String[] opciones = {&quot;Si&quot;,&quot;No&quot;};</span>
-<span class="nc" id="L207">        int eleccion = JOptionPane.showOptionDialog(null,</span>
-                &quot;¿Estás seguro que deseas salir?&quot;, &quot;Salir del sistema&quot;,
-                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null, opciones, &quot;No&quot;);
-<span class="nc bnc" id="L211" title="All 2 branches missed.">        if(eleccion == 0 ){</span>
-<span class="nc" id="L212">            System.exit(0);</span>
-        }else{
-            
-        }
-<span class="nc" id="L216">    }//GEN-LAST:event_MenuItemSalirActionPerformed</span>
+<span class="nc" id="L178">        pack();</span>
+<span class="nc" id="L179">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
 
     private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         //Se envía una evaluación con/sin cliente dependiendo del seleccionado
-<span class="nc" id="L220">        Respuesta r = null;</span>
-<span class="nc" id="L221">        estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));</span>
-<span class="nc bnc" id="L222" title="All 2 branches missed.">        if (ComboBoxClientes.getSelectedIndex() == 0){</span>
-<span class="nc" id="L223">            r = s.agregarEvaluacionAnonima(estrellas, TextAreaComentario.getText());</span>
+<span class="nc" id="L183">        Respuesta r = null;</span>
+<span class="nc" id="L184">        estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        if (ComboBoxClientes.getSelectedIndex() == 0){</span>
+<span class="nc" id="L186">            r = s.agregarEvaluacionAnonima(estrellas, TextAreaComentario.getText());</span>
         } else {
-<span class="nc" id="L225">            r = s.agregarEvaluacionIdentificada((Cliente) ComboBoxClientes.getSelectedItem(),</span>
-<span class="nc" id="L226">                    estrellas, TextAreaComentario.getText());</span>
+<span class="nc" id="L188">            r = s.agregarEvaluacionIdentificada((Cliente) ComboBoxClientes.getSelectedItem(),</span>
+<span class="nc" id="L189">                    estrellas, TextAreaComentario.getText());</span>
         }
-<span class="nc" id="L228">        JOptionPane.showMessageDialog(null, r.getRespuesta(),</span>
+<span class="nc" id="L191">        JOptionPane.showMessageDialog(null, r.getRespuesta(),</span>
                 &quot;Evaluacion enviada con éxito!&quot;,
                 JOptionPane.INFORMATION_MESSAGE);
-<span class="nc" id="L231">        TextAreaComentario.setText(&quot;&quot;);</span>
-<span class="nc" id="L232">        ComboBoxClientes.setSelectedIndex(0);</span>
-<span class="nc" id="L233">        RadioButton3.setSelected(true);</span>
-<span class="nc" id="L234">    }//GEN-LAST:event_BotonEnviarActionPerformed</span>
+<span class="nc" id="L194">        TextAreaComentario.setText(&quot;&quot;);</span>
+<span class="nc" id="L195">        ComboBoxClientes.setSelectedIndex(0);</span>
+<span class="nc" id="L196">        RadioButton3.setSelected(true);</span>
+<span class="nc" id="L197">    }//GEN-LAST:event_BotonEnviarActionPerformed</span>
+
+    private void BotonNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoCliActionPerformed
+<span class="nc" id="L200">        new NuevoCliente(s).setVisible(true);</span>
+<span class="nc" id="L201">    }//GEN-LAST:event_BotonNuevoCliActionPerformed</span>
     
     /**
      * @param args the command line arguments
@@ -240,33 +207,28 @@ public class Principal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         
         /* Create and display the form */
-<span class="nc" id="L243">        java.awt.EventQueue.invokeLater(new Runnable() {</span>
+<span class="nc" id="L210">        java.awt.EventQueue.invokeLater(new Runnable() {</span>
             public void run() {
-<span class="nc" id="L245">                new Principal().setVisible(true);</span>
-<span class="nc" id="L246">            }</span>
+<span class="nc" id="L212">                new Principal(s).setVisible(true);</span>
+<span class="nc" id="L213">            }</span>
         });
-<span class="nc" id="L248">    }</span>
-    
-    public void populateData(){
-        //Precarga de datos
-<span class="nc" id="L252">        s.agregarCliente(&quot;Juan Pablo Gonzalez&quot;, &quot;91827364&quot;, &quot;098605049&quot;, &quot;jpgonzalez@gmail.com&quot;);</span>
-<span class="nc" id="L253">        s.agregarCliente(&quot;Federico Abreu&quot;, &quot;12345678&quot;, &quot;09626771&quot;, &quot;fabreu@gmail.com&quot;);</span>
-<span class="nc" id="L254">        s.agregarCliente(&quot;Adrian Perez&quot;, &quot;876544321&quot;, &quot;094324758&quot;, &quot;aperez@outlook.com&quot;);</span>
-<span class="nc" id="L255">    }</span>
+<span class="nc" id="L215">    }</span>
+   
     
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
-<span class="nc bnc" id="L258" title="All 2 branches missed.">        for (Enumeration&lt;AbstractButton&gt; buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {</span>
-<span class="nc" id="L259">            AbstractButton button = buttons.nextElement();</span>
-<span class="nc bnc" id="L260" title="All 2 branches missed.">            if (button.isSelected()) {</span>
-<span class="nc" id="L261">                return button.getText();</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        for (Enumeration&lt;AbstractButton&gt; buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {</span>
+<span class="nc" id="L220">            AbstractButton button = buttons.nextElement();</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if (button.isSelected()) {</span>
+<span class="nc" id="L222">                return button.getText();</span>
             }
-<span class="nc" id="L263">        }</span>
+<span class="nc" id="L224">        }</span>
         
-<span class="nc" id="L265">        return null;</span>
+<span class="nc" id="L226">        return null;</span>
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonEnviar;
+    private javax.swing.JButton BotonNuevoCli;
     private javax.swing.JComboBox&lt;String&gt; ComboBoxClientes;
     private javax.swing.JLabel LabelCliente;
     private javax.swing.JLabel LabelComentario;
@@ -274,9 +236,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMalo;
     private javax.swing.JLabel LabelPuntuacion;
     private javax.swing.JLabel LabelTitulo;
-    private javax.swing.JMenuItem MenuItemSalir;
-    private javax.swing.JMenuItem MenuItemSortear;
-    private javax.swing.JMenu MenuOpciones;
     private javax.swing.JRadioButton RadioButton1;
     private javax.swing.JRadioButton RadioButton2;
     private javax.swing.JRadioButton RadioButton3;
@@ -284,7 +243,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioButton5;
     private javax.swing.JTextArea TextAreaComentario;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

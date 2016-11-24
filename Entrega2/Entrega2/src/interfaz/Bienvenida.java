@@ -41,6 +41,7 @@ public class Bienvenida extends javax.swing.JFrame {
         MIEvaluar = new javax.swing.JMenuItem();
         MINuevoCli = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        MIDefinirSorteo = new javax.swing.JMenuItem();
         MISortear = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MISalir = new javax.swing.JMenuItem();
@@ -71,6 +72,14 @@ public class Bienvenida extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Administrador");
+
+        MIDefinirSorteo.setText("Definir sorteo");
+        MIDefinirSorteo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIDefinirSorteoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIDefinirSorteo);
 
         MISortear.setText("Sortear");
         MISortear.setToolTipText("Sortear");
@@ -143,6 +152,10 @@ public class Bienvenida extends javax.swing.JFrame {
     private void MISortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MISortearActionPerformed
         new Sortear(s).setVisible(true);
     }//GEN-LAST:event_MISortearActionPerformed
+
+    private void MIDefinirSorteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIDefinirSorteoActionPerformed
+        new DefinirSorteo(s).setVisible(true);
+    }//GEN-LAST:event_MIDefinirSorteoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -187,6 +200,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MIDefinirSorteo;
     private javax.swing.JMenuItem MIEvaluar;
     private javax.swing.JMenuItem MINuevoCli;
     private javax.swing.JMenuItem MISalir;

@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
 import sistema.Sistema;
 
 /**
@@ -21,6 +22,8 @@ public class DefinirSorteo extends javax.swing.JFrame {
     public DefinirSorteo(Sistema sis) {
         initComponents();
         this.s = sis;
+        TFCtdad.setText(String.valueOf(s.getCantPremios()));
+        TFMensaje.setText(s.getMensajeGanador());
     }
 
     /**
@@ -97,7 +100,26 @@ public class DefinirSorteo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarActionPerformed
-        // TODO add your handling code here:
+        int cantidad = 0;
+        boolean ok = true;
+        if (TFCtdad.getText().isEmpty() || TFMensaje.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Completa todos los campos antes de proceder",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                cantidad = Integer.parseInt(TFCtdad.getText());
+            } catch (NumberFormatException e){
+                ok = false;
+                JOptionPane.showMessageDialog(null,"Por favor ingresa un valor numérico",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (ok) {
+                s.setCantPremios(cantidad);
+                s.setMensajeGanador(TFMensaje.getText());
+                JOptionPane.showMessageDialog(null,"Sorteo editado con éxito.",
+                    "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_BotonConfirmarActionPerformed
 
     /**

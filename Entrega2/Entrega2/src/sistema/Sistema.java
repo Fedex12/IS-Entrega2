@@ -99,26 +99,87 @@ public class Sistema {
         }
         return respuesta;
     }
+    
+    public Respuesta setFicha(String nombre, String direccion, String horario, String tipoComida) {
+        Respuesta respuesta = new Respuesta(-1, "");
+        /**
+         * Como la ficha no es relevante en el funcionamiento del programa
+         * permito que se le ingrese Strings con cualquier formato o vacios.
+         */
+        this.ficha.setNombre(nombre);
+        this.ficha.setDireccion(direccion);
+        this.ficha.setHorario(horario);
+        this.ficha.setTipoComida(tipoComida);
+        respuesta.setCod(0);
+        respuesta.setRespuesta("Se modifico Ficha correctamente");
+        return respuesta;
+    }
+
+    public Ficha getFicha() {
+        return ficha;
+}
+
+    public int getCantPremios() {
+        return cantPremios;
+    }
+
+    public void setCantPremios(int cantidadPremios) {
+        this.cantPremios = cantidadPremios;
+    }
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
+    
+     public void setFicha(Ficha ficha) {
+        this.ficha = ficha;
+    }
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+    
 
     public ArrayList<Participante> getParticipantes() {
         return participantes;
+    }
+        
+     public void setParticipantes(ArrayList<Participante> participantes) {
+        this.participantes = participantes;
     }
 
     public ArrayList<Participante> getGanadores() {
         return ganadores;
     }
+    
+    public void setGanadores(ArrayList<Participante> ganadores) {
+        this.ganadores = ganadores;
+    }
+
 
     public ArrayList<Evaluacion> getEvaluaciones() {
         return evaluaciones;
     }
+
+    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
+    
     
      public ArrayList<String> getEmailEnviados() {
         return emailEnviados;
     }
+
+    public void setEmailEnviados(ArrayList<String> emailEnviados) {
+        this.emailEnviados = emailEnviados;
+    }
+
+    public String getMensajeGanador() {
+        return mensajeGanador;
+    }
+
+    public void setMensajeGanador(String mensajeGanador) {
+        this.mensajeGanador = mensajeGanador;
+}
 
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
         Respuesta respuesta = new Respuesta(-1, "");

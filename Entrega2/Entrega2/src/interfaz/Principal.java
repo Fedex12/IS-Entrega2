@@ -29,16 +29,13 @@ public class Principal extends javax.swing.JFrame {
     
     private static Evaluacion evaluacion;
     private static int estrellas = 0;
-    Sistema s;
+    private static Sistema s;
     
-    public Principal() {
+    public Principal(Sistema sis) {
         initComponents();
-        s = new Sistema();
-        s = new Sistema();
+        this.s = sis;
         evaluacion = new Evaluacion();
-        
-        //Se precargan datos
-        populateData();
+       
         
         //Inicialización del Combobox de clientes con uno vacío al principio
         ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));
@@ -73,10 +70,7 @@ public class Principal extends javax.swing.JFrame {
         RadioButton5 = new javax.swing.JRadioButton();
         LabelPuntuacion = new javax.swing.JLabel();
         BotonEnviar = new javax.swing.JButton();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        MenuOpciones = new javax.swing.JMenu();
-        MenuItemSortear = new javax.swing.JMenuItem();
-        MenuItemSalir = new javax.swing.JMenuItem();
+        BotonNuevoCli = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,29 +149,14 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(BotonEnviar);
         BotonEnviar.setBounds(230, 430, 290, 60);
 
-        MenuOpciones.setText("Opciones");
-
-        MenuItemSortear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        MenuItemSortear.setText("Sortear");
-        MenuItemSortear.addActionListener(new java.awt.event.ActionListener() {
+        BotonNuevoCli.setText("+");
+        BotonNuevoCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemSortearActionPerformed(evt);
+                BotonNuevoCliActionPerformed(evt);
             }
         });
-        MenuOpciones.add(MenuItemSortear);
-
-        MenuItemSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        MenuItemSalir.setText("Salir");
-        MenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemSalirActionPerformed(evt);
-            }
-        });
-        MenuOpciones.add(MenuItemSalir);
-
-        jMenuBar2.add(MenuOpciones);
-
-        setJMenuBar(jMenuBar2);
+        jPanel1.add(BotonNuevoCli);
+        BotonNuevoCli.setBounds(250, 110, 40, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,30 +169,12 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 2, Short.MAX_VALUE)
+                .addGap(0, 28, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void MenuItemSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSortearActionPerformed
-        new Sortear(s).setVisible(true);
-    }//GEN-LAST:event_MenuItemSortearActionPerformed
-
-    private void MenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSalirActionPerformed
-        //Mensaje a mostrar al querer salir del sistema
-        String[] opciones = {"Si","No"};
-        int eleccion = JOptionPane.showOptionDialog(null,
-                "¿Estás seguro que deseas salir?", "Salir del sistema",
-                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null, opciones, "No");
-        if(eleccion == 0 ){
-            System.exit(0);
-        }else{
-            
-        }
-    }//GEN-LAST:event_MenuItemSalirActionPerformed
 
     private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         //Se envía una evaluación con/sin cliente dependiendo del seleccionado
@@ -232,6 +193,10 @@ public class Principal extends javax.swing.JFrame {
         ComboBoxClientes.setSelectedIndex(0);
         RadioButton3.setSelected(true);
     }//GEN-LAST:event_BotonEnviarActionPerformed
+
+    private void BotonNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoCliActionPerformed
+        new NuevoCliente(s).setVisible(true);
+    }//GEN-LAST:event_BotonNuevoCliActionPerformed
     
     /**
      * @param args the command line arguments
@@ -242,17 +207,11 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal(s).setVisible(true);
             }
         });
     }
-    
-    public void populateData(){
-        //Precarga de datos
-        s.agregarCliente("Juan Pablo Gonzalez", "91827364", "098605049", "jpgonzalez@gmail.com");
-        s.agregarCliente("Federico Abreu", "12345678", "09626771", "fabreu@gmail.com");
-        s.agregarCliente("Adrian Perez", "876544321", "094324758", "aperez@outlook.com");
-    }
+   
     
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
@@ -267,6 +226,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonEnviar;
+    private javax.swing.JButton BotonNuevoCli;
     private javax.swing.JComboBox<String> ComboBoxClientes;
     private javax.swing.JLabel LabelCliente;
     private javax.swing.JLabel LabelComentario;
@@ -274,9 +234,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMalo;
     private javax.swing.JLabel LabelPuntuacion;
     private javax.swing.JLabel LabelTitulo;
-    private javax.swing.JMenuItem MenuItemSalir;
-    private javax.swing.JMenuItem MenuItemSortear;
-    private javax.swing.JMenu MenuOpciones;
     private javax.swing.JRadioButton RadioButton1;
     private javax.swing.JRadioButton RadioButton2;
     private javax.swing.JRadioButton RadioButton3;
@@ -284,7 +241,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioButton5;
     private javax.swing.JTextArea TextAreaComentario;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

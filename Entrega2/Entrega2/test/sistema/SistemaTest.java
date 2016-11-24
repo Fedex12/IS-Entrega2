@@ -46,12 +46,12 @@ public class SistemaTest {
      * Test of agregarCliente method, of class Sistema.
      */
     @Test
-    public void testAgregarClienteOK() {
+    public void testAgregarClienteCorrecto() {
         
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String mail = "EmailCliente";
+        String mail = "Email@mail";
         Sistema instance = new Sistema();
         Respuesta resp = instance.agregarCliente(nombre, documento, contacto, mail);
         assertEquals(0, resp.getCod());
@@ -69,7 +69,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "mail@mail";
         Cliente cliente = new Cliente(nombre, documento, contacto, email);
         instance.agregarCliente(nombre, documento, contacto, email);
         ArrayList<Cliente> result = instance.getClientes();
@@ -85,7 +85,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "EmailCliente@mail";
         int expResult = -1;
         instance.agregarCliente(nombre, documento, contacto, email);
         Respuesta result= instance.agregarCliente(nombre, documento, contacto, email);
@@ -94,6 +94,40 @@ public class SistemaTest {
         // TODO review the generated test code and remove the default call to fail.
 
     }
+    
+          @Test
+    public void testAgregarNombreVacio() {
+        
+        Sistema instance = new Sistema();
+        String nombre = "";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente@mail";
+        int expResult = -1;
+        
+        Respuesta result= instance.agregarCliente(nombre, documento, contacto, email);
+        System.out.println(result.getRespuesta());
+        assertEquals(expResult, result.getCod());
+        // TODO review the generated test code and remove the default call to fail.
+
+    }
+              @Test
+    public void testAgregarMailIncorrecto() {
+        
+        Sistema instance = new Sistema();
+        String nombre = "NombreVliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailClient";
+        int expResult = -1;
+        
+        Respuesta result= instance.agregarCliente(nombre, documento, contacto, email);
+        System.out.println(result.getRespuesta());
+        assertEquals(expResult, result.getCod());
+        // TODO review the generated test code and remove the default call to fail.
+
+    }
+    
 
     /**
      * Test of agregarEvaluacionIdentificada method, of class Sistema.
@@ -105,7 +139,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "EmailCliente@mail";
         int estrellas = 3;
         String comentarios = "ComentarioPrueba";
         
@@ -119,6 +153,28 @@ public class SistemaTest {
        
         
     }
+    
+    
+        @Test
+    public void testAgregarEvaluacionIdentificadaComentarioVacio() {
+       
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente@mail";
+        int estrellas = 3;
+        String comentarios = "";
+        
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        instance.agregarCliente(nombre, documento, contacto, email);
+       
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       
+        
+    }
     @Test
     public void testAgregarEvaluacionIdentificadaDatosIncorrectos1() {
        
@@ -126,7 +182,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "EmailCliente@mail";
         int estrellas = 7;
         String comentarios = "ComentarioPrueba";
         
@@ -169,7 +225,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "EmailCliente@mail";
         int estrellas = 3;
         String comentarios = "ComentarioPrueba";
         Participante expResult;
@@ -191,7 +247,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "EmailCliente@mail";
         
         int[] estrellas = {3,4,5};
         String[] comentarios ={"Comentario1","Comentario2","Comentario3"};
@@ -214,12 +270,23 @@ public class SistemaTest {
     }
        
         @Test
-       public void testAgregarEvaluacionAnonimaOK() {
+       public void testAgregarEvaluacionAnonimaRespuestaOK() {
        
         Sistema instance = new Sistema();
         int estrellas = 4;
         String comentarios = "ComentarioPrueba";
         int expResult = 0;
+        Respuesta result = instance.agregarEvaluacionAnonima(estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+       }
+       
+                @Test
+       public void testAgregarEvaluacionAnonimaComentarioVacio() {
+       
+        Sistema instance = new Sistema();
+        int estrellas = 4;
+        String comentarios = "";
+        int expResult = -1;
         Respuesta result = instance.agregarEvaluacionAnonima(estrellas, comentarios);
         assertEquals(expResult, result.getCod());
        
@@ -282,11 +349,38 @@ public class SistemaTest {
      * Test of difinirSorteo method, of class Sistema.
      */
     @Test
-    public void testDifinirSorteo() {
+    public void testDifinirSorteoOK() {
         
         int cantidadPremios = 3;
         String mensaje = "MensajePrueba";
         int expResult = 0;
+        
+        Sistema instance = new Sistema();
+        
+        Respuesta result = instance.definirSorteo(cantidadPremios, mensaje);
+        assertEquals(expResult, result.getCod());
+        
+    }
+        @Test
+    public void testDifinirSorteoMensajeVacio() {
+        
+        int cantidadPremios = 3;
+        String mensaje = "";
+        int expResult = -1;
+        
+        Sistema instance = new Sistema();
+        
+        Respuesta result = instance.definirSorteo(cantidadPremios, mensaje);
+        assertEquals(expResult, result.getCod());
+        
+    }
+    
+        @Test
+    public void testDifinirSorteoCantidadPremiosNegativos() {
+        
+        int cantidadPremios = -3;
+        String mensaje = "MensajePrueba";
+        int expResult = -1;
         
         Sistema instance = new Sistema();
         
@@ -303,7 +397,7 @@ public class SistemaTest {
         String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "Fede_12990@hotmail.com";
        
         Cliente cliente= new Cliente(nombre, documento, contacto, email);
         Participante participante = new Participante(cliente);
@@ -326,7 +420,7 @@ public class SistemaTest {
          String nombre = "NombreCliente";
         String documento = "DocumentoCliente";
         String contacto = "ContactoCliente";
-        String email = "EmailCliente";
+        String email = "Fede_12990@hotmail.com";
         int estrellas = 3;
         String comentarios = "ComentarioPrueba";
         int cantidadPremios = 1;
@@ -342,20 +436,7 @@ public class SistemaTest {
         
     }
     
-    @Test
-    public void testSortearErrorNoHayParticipantes() {
-        
-        int estrellas = 3;
-        String comentarios = "ComentarioPrueba";
-        int cantidadPremios = 1;
-        String mensaje = "MensajePrueba";
-        Sistema instance = new Sistema();
-        int expResult = -1;
-        instance.definirSorteo(cantidadPremios, mensaje);
-        Respuesta result = instance.sortear();
-        assertEquals(expResult, result.getCod());
-        
-    }
+
     
     @Test
     public void testSortearSeSorteaCorrectamenteYVerificoGanador() {
@@ -364,8 +445,8 @@ public class SistemaTest {
         String mensaje = "MensajePrueba";
         Sistema instance = new Sistema();
         for(int i=1;i<6;i++){
-        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
-        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Fede_12990@hotmail.com"+i);
+        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Fede_12990@hotmail.com"+i);
         instance.agregarEvaluacionIdentificada(cliente, i, "Comentario"+i);
         }
         instance.definirSorteo(cantidadPremios, mensaje);
@@ -385,8 +466,8 @@ public class SistemaTest {
         String mensaje = "MensajePrueba";
         Sistema instance = new Sistema();
         for(int i=1;i<6;i++){
-        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
-        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Mail"+i);
+        Cliente cliente= new Cliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Fede_12990@hotmail.com"+i);
+        instance.agregarCliente("Nombre"+i, "Documento"+i, "Contacto"+i, "Fede_12990@hotmail.com"+i);
         instance.agregarEvaluacionIdentificada(cliente, i, "Comentario"+i);
         }
         instance.definirSorteo(cantidadPremios, mensaje);

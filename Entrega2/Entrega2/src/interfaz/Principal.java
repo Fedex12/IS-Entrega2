@@ -5,7 +5,9 @@
  */
 package interfaz;
 
+import clases.Cliente;
 import clases.Evaluacion;
+import clases.Participante;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -54,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
         LabelPuntuacion = new javax.swing.JLabel();
         ButtonEnviar = new javax.swing.JButton();
         LabelTitulo = new javax.swing.JLabel();
-        ComboBoxClientes = new javax.swing.JComboBox<>();
+        ComboBoxClientes = new javax.swing.JComboBox<String>();
         LabelCliente = new javax.swing.JLabel();
         LabelComentario = new javax.swing.JLabel();
         LabelMalo = new javax.swing.JLabel();
@@ -72,6 +74,11 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1.add(RadioButton2);
         RadioButton2.setText("2");
+        RadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(RadioButton3);
         RadioButton3.setText("3");
@@ -93,7 +100,7 @@ public class Principal extends javax.swing.JFrame {
 
         LabelTitulo.setText("Formulario para evaluar la atención obtenida en el restaurante");
 
-        ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         LabelCliente.setText("Cliente:");
 
@@ -177,32 +184,19 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ButtonEnviarActionPerformed
 
+    private void RadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RadioButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        Sistema sis=new Sistema();
+        Cliente cliente= new Cliente("Federico", "contacto", "Fede_12990@hotmail.com", "Fede_12990@hotmail.com");
+        Participante part= new Participante(cliente);
+        sis.enviarMail(part);
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

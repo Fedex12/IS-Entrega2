@@ -27,8 +27,8 @@ public class Participante{
     }
 
     public void setEvaluaciones(ArrayList&lt;Evaluacion&gt; evaluaciones) {
-<span class="nc" id="L30">        this.evaluaciones = evaluaciones;</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L30">        this.evaluaciones = evaluaciones;</span>
+<span class="fc" id="L31">    }</span>
     
     public void agregarEvaluacion(Evaluacion evaluacion){
 <span class="fc" id="L34">        evaluaciones.add(evaluacion);</span>
@@ -39,15 +39,15 @@ public class Participante{
     }
 
     public void setCliente(Cliente cliente) {
-<span class="nc" id="L42">        this.cliente = cliente;</span>
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L42">        this.cliente = cliente;</span>
+<span class="fc" id="L43">    }</span>
     
         @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">         if (obj instanceof Participante) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">         if (obj instanceof Participante) {</span>
 <span class="fc" id="L48">         Participante participante = (Participante) obj;</span>
 <span class="fc" id="L49">         return participante.getCliente().equals(cliente);</span>
-<span class="nc" id="L50">         }else{return false;}</span>
+<span class="fc" id="L50">         }else{return false;}</span>
     }
     
 }

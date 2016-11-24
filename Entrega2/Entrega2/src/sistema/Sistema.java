@@ -13,6 +13,8 @@ import clases.Respuesta;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -49,23 +51,33 @@ public class Sistema {
     }
 
     public Respuesta agregarCliente(String nombre, String documento, String contacto, String mail) {
-        Respuesta resp = new Respuesta(-1, "");
-        boolean existe = false;
-        for (int i = 0; i < clientes.size(); i++) {
-            if (documento == clientes.get(i).getDocumento()) {
-                existe = true;
+        Respuesta respuesta = new Respuesta(-1, "");
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mail);
+
+        if (nombre.isEmpty()) {
+            respuesta = new Respuesta(-1, "El mail no puede estar vacio.");
+        } else if (!matcher.matches()) {
+            respuesta = new Respuesta(-1, "El mail es incorrecto.");
+        } else {
+            boolean existe = false;
+            for (int i = 0; i < clientes.size(); i++) {
+                if (documento == clientes.get(i).getDocumento()) {
+                    existe = true;
+                }
+            }
+            if (existe) {
+                respuesta.setCod(-1);
+                respuesta.setRespuesta("Error: El documento ya existe en el sistema.");
+            } else {
+                Cliente cliente = new Cliente(nombre, documento, contacto, mail);
+                clientes.add(cliente);
+                respuesta.setCod(0);
+                respuesta.setRespuesta("Se agrego cliente correctamente.");
             }
         }
-        if (existe) {
-            resp.setCod(-1);
-            resp.setRespuesta("Error: El documento ya existe en el sistema.");
-        } else {
-            Cliente cliente = new Cliente(nombre, documento, contacto, mail);
-            clientes.add(cliente);
-            resp.setCod(0);
-            resp.setRespuesta("Se agrego cliente correctamente.");
-        }
-        return resp;
+        return respuesta;
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -75,8 +87,8 @@ public class Sistema {
     public ArrayList<Participante> getParticipantes() {
         return participantes;
     }
-    
-     public ArrayList<Participante> getGanadores() {
+
+    public ArrayList<Participante> getGanadores() {
         return ganadores;
     }
 
@@ -85,11 +97,12 @@ public class Sistema {
     }
 
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
-        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
-
         Respuesta respuesta = new Respuesta(-1, "");
 
-        if (estrellas >= 1 && estrellas <= 5) {
+        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
+        if (comentarios.isEmpty()) {
+            respuesta = new Respuesta(-1, "El comentario no puede estar vacio.");
+        } else if (estrellas >= 1 && estrellas <= 5) {
 
             Participante participante = new Participante(cliente);
             if (participantes.contains(participante)) {
@@ -116,8 +129,9 @@ public class Sistema {
         Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
         Respuesta respuesta = new Respuesta(-1, "");
         boolean seAgrego = false;
-        if (estrellas >= 1 && estrellas <= 5) {
-
+        if (comentarios.isEmpty()) {
+            respuesta = new Respuesta(-1, "El comentario no puede estar vacio.");
+        } else if (estrellas >= 1 && estrellas <= 5) {
             evaluaciones.add(evaluacion);
             respuesta.setCod(0);
             respuesta.setRespuesta("Se agrego evalucion correctamente.");
@@ -139,71 +153,87 @@ public class Sistema {
     }
 
     public Respuesta definirSorteo(int cantidadPremios, String mensaje) {
-        Respuesta respuesta = new Respuesta(0, "Se modifico ficha correctamente");
 
-        this.cantPremios = cantidadPremios;
-        this.mensajeGanador = mensaje;
+        Respuesta respuesta = new Respuesta(-1, "");
+        if (cantidadPremios <= 0) {
+            respuesta = new Respuesta(-1, "La cantidad de premios debe ser mayor a cero.");
+        } else if (mensaje.isEmpty()) {
+            respuesta = new Respuesta(-1, "El mensaje no puede estar vacio.");
+        } else {
 
+            this.cantPremios = cantidadPremios;
+            this.mensajeGanador = mensaje;
+            respuesta = new Respuesta(0, "Se modifico ficha correctamente.");
+        }
         return respuesta;
     }
 
     public Respuesta enviarMail(Participante participante) {
-        Respuesta respuesta;
+        Respuesta respuesta = new Respuesta(0, "Todo ok");
         String mail = "To:" + participante.getCliente().getContacto() + "\n";
         mail = participante.getCliente().getNombre() + ".\n" + mensajeGanador;
-        
-        final String username = "username@gmail.com";
-	final String password = "password";
-        
-	Properties props = new Properties();
-	props.put("mail.smtp.auth", "true");
-	props.put("mail.smtp.starttls.enable", "true");
-	props.put("mail.smtp.host", "smtp.gmail.com");
-	props.put("mail.smtp.port", "587");
-        
-	Session session = Session.getInstance(props,
-            new javax.mail.Authenticator() {
-		protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-		}
-            });
-        
-	try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));  
-            message.setRecipients(Message.RecipientType.TO,
-        	InternetAddress.parse(participante.getCliente().getEmail()));
-            message.setSubject("Ganador del sorteo");
-            message.setText(mail);
-            Transport.send(message);
-            respuesta = new Respuesta(0, "Se envio mail correctamente.");
-            emailEnviados.add(mail);
-	} catch (MessagingException e) {
-            respuesta = new Respuesta(-1, "Error al enviar el mail");
-            throw new RuntimeException(e);
-        }
+        emailEnviados.add(mail);
+        final String username = "ingenieriasoftwareort@gmail.com";
+        final String password = "Hola1234";
 
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        /*
+         Session session = Session.getInstance(props,
+         new javax.mail.Authenticator() {
+         protected PasswordAuthentication getPasswordAuthentication() {
+         return new PasswordAuthentication(username, password);
+         }
+         });
+        
+         try {
+            
+         Message message = new MimeMessage(session);
+         message.setFrom(new InternetAddress(username));  
+         message.setRecipients(Message.RecipientType.TO,
+         InternetAddress.parse(participante.getCliente().getEmail()));
+         message.setSubject("Ganador del sorteo");
+         message.setText(mail);
+         Transport.send(message);
+         respuesta = new Respuesta(0, "Se envio mail correctamente.");
+            
+         } catch (MessagingException e) {
+         respuesta = new Respuesta(-1, "Error al enviar el mail");
+         throw new RuntimeException(e);
+         }
+         */
         return respuesta;
     }
 
     public Respuesta sortear() {
         Respuesta respuesta = new Respuesta(-1, "");
         Random rnd = new Random();
-        ganadores=new ArrayList<Participante>();
+        ganadores = new ArrayList<Participante>();
         String mensaje = "Los ganadores del sorteo son: \n";
         
-        for (int i = 0; i < cantPremios; i++) {
-            int random = rnd.nextInt() % participantes.size();
-            Participante ganador = participantes.get(random);
-            if (!ganadores.contains(ganador)) {
-                ganadores.add(ganador);
-                mensaje += ganador.getCliente().getNombre() + " Contacto: " + ganador.getCliente().getContacto() + " \n";
-                enviarMail(ganador);
-            } else {
-                i--;
+        if (cantPremios > participantes.size()) {
+            for (int i = 0; i < participantes.size(); i++) {
+                ganadores.add(participantes.get(i));
+                mensaje += participantes.get(i).getCliente().getNombre() + " Contacto: " + participantes.get(i).getCliente().getContacto() + " \n";
+                enviarMail(participantes.get(i));
+
+            }
+        } else {
+            for (int i = 0; i < cantPremios; i++) {
+                int random = (int)(Math.random()*(participantes.size()));
+                Participante ganador = participantes.get(random);
+                if (!ganadores.contains(ganador)) {
+                    ganadores.add(ganador);
+                    mensaje += ganador.getCliente().getNombre() + " Contacto: " + ganador.getCliente().getContacto() + " \n";
+                    enviarMail(ganador);
+                } else {
+                    i--;
+                }
             }
         }
-        
         respuesta.setCod(0);
         respuesta.setRespuesta(mensaje);
 

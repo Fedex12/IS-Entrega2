@@ -5,7 +5,6 @@
  */
 package interfaz;
 
-import clases.Ficha;
 import clases.Respuesta;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,6 +26,8 @@ public class ModificarFicha extends javax.swing.JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
+        
+        //Se cargan los valores del sistema
         TFComida.setText(s.getFicha().getTipoComida());
         TFDireccion.setText(s.getFicha().getDireccion());
         TFHorario.setText(s.getFicha().getHorario());
@@ -138,6 +139,7 @@ public class ModificarFicha extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarActionPerformed
+        //Se setea la ficha del sistema con los nuevos datos
         Respuesta r = s.setFicha(TFNombre.getText(), TFDireccion.getText(), TFHorario.getText(),
                 TFComida.getText());
         JOptionPane.showMessageDialog(null,r.getRespuesta(),"Confirmación", JOptionPane.INFORMATION_MESSAGE);

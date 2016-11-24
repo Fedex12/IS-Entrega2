@@ -24,8 +24,12 @@ public class DefinirSorteo extends javax.swing.JFrame {
     public DefinirSorteo(Sistema sis) {
         initComponents();
         this.setResizable(false);
+        
+        //Se cierra solo este frame y no la app
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
+        
+        //Valores existentes en el sistema
         TFCtdad.setText(String.valueOf(s.getCantPremios()));
         TFMensaje.setText(s.getMensajeGanador());
     }
@@ -124,6 +128,9 @@ public class DefinirSorteo extends javax.swing.JFrame {
                     "Error", JOptionPane.ERROR_MESSAGE);
             }
             if (ok) {
+                /*Se guardan los valores luego de corroborar que no son vacíos
+                y que la cantidad de premios es numérico
+                */
                 Respuesta r = s.definirSorteo(cantidad, TFMensaje.getText());
                 JOptionPane.showMessageDialog(null,r.getRespuesta(),
                     "Confirmación", JOptionPane.INFORMATION_MESSAGE);

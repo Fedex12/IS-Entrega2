@@ -7,19 +7,14 @@ package interfaz;
 
 import clases.Cliente;
 import clases.Evaluacion;
-import clases.Participante;
 import clases.Respuesta;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
-import com.alee.laf.WebLookAndFeel;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
 
 /**
  *
@@ -206,9 +201,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonEnviarActionPerformed
 
     private void BotonNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoCliActionPerformed
+        //Se llama al frame para crear un nuevo cliente
         new NuevoCliente(s).setVisible(true);
     }//GEN-LAST:event_BotonNuevoCliActionPerformed
  
+    
+    //Método que devuelve el texto del Radio Button seleccionado
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();

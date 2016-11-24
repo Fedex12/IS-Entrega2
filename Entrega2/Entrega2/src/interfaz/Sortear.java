@@ -9,9 +9,7 @@ import clases.Respuesta;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 import sistema.Sistema;
 
 /**
@@ -31,6 +29,8 @@ public class Sortear extends javax.swing.JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
+        
+        //Se inicializa la lista con los emails que ya se encuentren en el sistema
         cargarLista();
     }
     
@@ -103,11 +103,14 @@ public class Sortear extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSortearActionPerformed
+        /*Se realiza el sorteo y luego se recarga la lista para agregar al nuevo
+        ganador*/
         Respuesta res = s.sortear();
         cargarLista();
         JOptionPane.showMessageDialog(null,res.getRespuesta(),"Resultado del sorteo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BotonSortearActionPerformed
 
+    //Método que recarga la lista
     public void cargarLista(){
         ListaGanadores.removeAll();
         listaEmails = s.getEmailEnviados();

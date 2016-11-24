@@ -139,6 +139,7 @@ public class NuevoCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIngresarActionPerformed
+        //Se agrega un nuevo cliente mediante sistema
         Respuesta r = s.agregarCliente(TFNombre.getText(), TFCI.getText(), TFCel.getText(), TFMail.getText());
         JOptionPane.showMessageDialog(null,r.getRespuesta(),"Ingresar nuevo cliente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BotonIngresarActionPerformed

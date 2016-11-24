@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame {
         RadioButton4 = new javax.swing.JRadioButton();
         RadioButton5 = new javax.swing.JRadioButton();
         LabelPuntuacion = new javax.swing.JLabel();
-        ButtonEnviar = new javax.swing.JButton();
+        BotonEnviar = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         MenuOpciones = new javax.swing.JMenu();
         MenuItemSortear = new javax.swing.JMenuItem();
@@ -86,15 +86,15 @@ public class Principal extends javax.swing.JFrame {
 
         ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(ComboBoxClientes);
-        ComboBoxClientes.setBounds(120, 90, 64, 22);
+        ComboBoxClientes.setBounds(160, 110, 64, 22);
 
         LabelCliente.setText("Cliente:");
         jPanel1.add(LabelCliente);
-        LabelCliente.setBounds(60, 90, 44, 16);
+        LabelCliente.setBounds(80, 120, 44, 16);
 
         LabelComentario.setText("Comentario:");
         jPanel1.add(LabelComentario);
-        LabelComentario.setBounds(303, 274, 71, 16);
+        LabelComentario.setBounds(60, 200, 71, 16);
 
         LabelMalo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LabelMalo.setText("Malo");
@@ -112,7 +112,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TextAreaComentario);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 310, 640, 173);
+        jScrollPane1.setBounds(50, 230, 640, 173);
 
         buttonGroup1.add(RadioButton1);
         RadioButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -142,16 +142,16 @@ public class Principal extends javax.swing.JFrame {
 
         LabelPuntuacion.setText("Puntuación:");
         jPanel1.add(LabelPuntuacion);
-        LabelPuntuacion.setBounds(50, 150, 67, 16);
+        LabelPuntuacion.setBounds(60, 150, 67, 16);
 
-        ButtonEnviar.setText("ENVIAR");
-        ButtonEnviar.addActionListener(new java.awt.event.ActionListener() {
+        BotonEnviar.setText("ENVIAR");
+        BotonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEnviarActionPerformed(evt);
+                BotonEnviarActionPerformed(evt);
             }
         });
-        jPanel1.add(ButtonEnviar);
-        ButtonEnviar.setBounds(360, 542, 75, 25);
+        jPanel1.add(BotonEnviar);
+        BotonEnviar.setBounds(230, 430, 290, 60);
 
         MenuOpciones.setText("Opciones");
 
@@ -195,7 +195,25 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ButtonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEnviarActionPerformed
+    private void MenuItemSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSortearActionPerformed
+        new Sortear(s).setVisible(true);
+    }//GEN-LAST:event_MenuItemSortearActionPerformed
+
+    private void MenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSalirActionPerformed
+        //Mensaje a mostrar al querer salir del sistema
+        String[] opciones = {"Si","No"};
+        int eleccion = JOptionPane.showOptionDialog(null,
+                "¿Estás seguro que deseas salir?", "Salir del sistema",
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, opciones, "No");
+        if(eleccion == 0 ){
+            System.exit(0);
+        }else{
+            
+        }
+    }//GEN-LAST:event_MenuItemSalirActionPerformed
+
+    private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         //Se envía una evaluación con/sin cliente dependiendo del seleccionado
         estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));
         if (ComboBoxClientes.getSelectedIndex() == 0){
@@ -213,25 +231,7 @@ public class Principal extends javax.swing.JFrame {
                     + " ganador de nuestro sorteo!", "Evaluacion enviada con éxito!",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_ButtonEnviarActionPerformed
-
-    private void MenuItemSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSortearActionPerformed
-        new Sortear().setVisible(true);
-    }//GEN-LAST:event_MenuItemSortearActionPerformed
-
-    private void MenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSalirActionPerformed
-        //Mensaje a mostrar al querer salir del sistema
-        String[] opciones = {"Si","No"};
-        int eleccion = JOptionPane.showOptionDialog(null,
-                "¿Estás seguro que deseas salir?", "Salir del sistema",
-                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null, opciones, "No");
-        if(eleccion == 0 ){
-            System.exit(0);
-        }else{
-            
-        }
-    }//GEN-LAST:event_MenuItemSalirActionPerformed
+    }//GEN-LAST:event_BotonEnviarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -266,7 +266,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButtonEnviar;
+    private javax.swing.JButton BotonEnviar;
     private javax.swing.JComboBox<String> ComboBoxClientes;
     private javax.swing.JLabel LabelCliente;
     private javax.swing.JLabel LabelComentario;

@@ -1,12 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package interfaz;
 
 import clases.Respuesta;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -18,11 +19,10 @@ import sistema.Sistema;
  * @author Juan Pablo
  */
 public class Sortear extends javax.swing.JFrame {
-
+    
     
     private static Sistema s;
     ArrayList<String> listaEmails;
-    JList<String> lista;
     /**
      * Creates new form Sortear
      */
@@ -30,16 +30,9 @@ public class Sortear extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
-        listaEmails = s.getEmailEnviados();
-        if (listaEmails.size() > 0) {
-            lista = new JList<>(listaEmails.toArray(new String[0]));
-            ListaGanadores.add(lista);
-        } else {
-            LabelEmails.setText("Aún no se han realizado sorteos.");
-            ListaGanadores.setVisible(false);
-        }
+        cargarLista();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,9 +101,10 @@ public class Sortear extends javax.swing.JFrame {
 
     private void BotonSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSortearActionPerformed
         Respuesta res = s.sortear();
+        cargarLista();
         JOptionPane.showMessageDialog(null,res.getRespuesta(),"Resultado del sorteo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BotonSortearActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -118,8 +112,8 @@ public class Sortear extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -137,13 +131,30 @@ public class Sortear extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Sortear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Sortear(s).setVisible(true);
             }
         });
+    }
+    
+    public void cargarLista(){
+        ListaGanadores.removeAll();
+        listaEmails = s.getEmailEnviados();
+        if (listaEmails.size() > 0) {
+            ListaGanadores.setVisible(true);
+            LabelEmails.setText("Emails enviados a los ganadores:");
+            DefaultListModel<String> model = new DefaultListModel<String>();
+            for(String s : listaEmails){
+                model.addElement(s);
+            }
+            ListaGanadores.setModel(model);
+        } else {
+            ListaGanadores.setVisible(false);
+            LabelEmails.setText("Aún no se han realizado sorteos.");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

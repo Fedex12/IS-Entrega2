@@ -44,6 +44,7 @@ public class Principal extends javax.swing.JFrame {
         ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));
         ComboBoxClientes.insertItemAt("------",0);
         RadioButton3.setSelected(true);
+        ComboBoxClientes.setSelectedIndex(0);
     }
     
     /**
@@ -227,6 +228,9 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, r.getRespuesta(),
                 "Evaluacion enviada con éxito!",
                 JOptionPane.INFORMATION_MESSAGE);
+        TextAreaComentario.setText("");
+        ComboBoxClientes.setSelectedIndex(0);
+        RadioButton3.setSelected(true);
     }//GEN-LAST:event_BotonEnviarActionPerformed
     
     /**

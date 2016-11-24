@@ -243,7 +243,7 @@ public class Sistema {
     public Respuesta enviarMail(Participante participante) {
         Respuesta respuesta = new Respuesta(0, "");
         String mail = "To:" + participante.getCliente().getContacto() + "\n";
-        mail = participante.getCliente().getNombre() + ".\n\n" + mensajeGanador;
+        mail = participante.getCliente().getNombre() + ". \n\n" + mensajeGanador;
         emailEnviados.add(mail);
         /**
          * Agrego el mail a mi lista de enviados

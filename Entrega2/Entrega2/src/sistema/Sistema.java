@@ -50,6 +50,10 @@ public class Sistema {
         this.mensajeGanador = "Usted a ganador un sorteo por una comida gratis";
     }
 
+
+    
+    
+
     public Respuesta agregarCliente(String nombre, String documento, String contacto, String email) {
         Respuesta respuesta = new Respuesta(-1, "");
         /**
@@ -100,87 +104,6 @@ public class Sistema {
         return respuesta;
     }
     
-    public Respuesta setFicha(String nombre, String direccion, String horario, String tipoComida) {
-        Respuesta respuesta = new Respuesta(-1, "");
-        /**
-         * Como la ficha no es relevante en el funcionamiento del programa
-         * permito que se le ingrese Strings con cualquier formato o vacios.
-         */
-        this.ficha.setNombre(nombre);
-        this.ficha.setDireccion(direccion);
-        this.ficha.setHorario(horario);
-        this.ficha.setTipoComida(tipoComida);
-        respuesta.setCod(0);
-        respuesta.setRespuesta("Se modifico Ficha correctamente");
-        return respuesta;
-    }
-
-    public Ficha getFicha() {
-        return ficha;
-}
-
-    public int getCantPremios() {
-        return cantPremios;
-    }
-
-    public void setCantPremios(int cantidadPremios) {
-        this.cantPremios = cantidadPremios;
-    }
-
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-    
-     public void setFicha(Ficha ficha) {
-        this.ficha = ficha;
-    }
-    public void setClientes(ArrayList<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-    
-
-    public ArrayList<Participante> getParticipantes() {
-        return participantes;
-    }
-        
-     public void setParticipantes(ArrayList<Participante> participantes) {
-        this.participantes = participantes;
-    }
-
-    public ArrayList<Participante> getGanadores() {
-        return ganadores;
-    }
-    
-    public void setGanadores(ArrayList<Participante> ganadores) {
-        this.ganadores = ganadores;
-    }
-
-
-    public ArrayList<Evaluacion> getEvaluaciones() {
-        return evaluaciones;
-    }
-
-    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
-        this.evaluaciones = evaluaciones;
-    }
-    
-    
-     public ArrayList<String> getEmailEnviados() {
-        return emailEnviados;
-    }
-
-    public void setEmailEnviados(ArrayList<String> emailEnviados) {
-        this.emailEnviados = emailEnviados;
-    }
-
-    public String getMensajeGanador() {
-        return mensajeGanador;
-    }
-
-    public void setMensajeGanador(String mensajeGanador) {
-        this.mensajeGanador = mensajeGanador;
-}
-
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
         Respuesta respuesta = new Respuesta(-1, "");
 
@@ -260,7 +183,7 @@ public class Sistema {
         return respuesta;
     }
 
-    public Respuesta modificarFicha(String nombre, String direccion, String horario, String tipoComida) {
+    public Respuesta setFicha(String nombre, String direccion, String horario, String tipoComida) {
         Respuesta respuesta = new Respuesta(-1, "");
         /**
          * Como la ficha no es relevante en el funcionamiento del programa
@@ -275,7 +198,13 @@ public class Sistema {
         return respuesta;
     }
 
-    public Respuesta definirSorteo(int cantPremios, String mensaje) {
+    public Ficha getFicha() {
+        return ficha;
+    }
+    
+    
+
+    public Respuesta definirSorteo(int cantidadPremios, String mensaje) {
 
         Respuesta respuesta = new Respuesta(-1, "");
         if (cantPremios <= 0) {
@@ -292,9 +221,9 @@ public class Sistema {
             /**
              * Si todo es correcto
              */
-            System.out.println(this.cantPremios + " - " + cantPremios);
-            this.cantPremios = cantPremios;
-            System.out.println("Despues " + this.cantPremios + " - " + cantPremios);
+            System.out.println("Antes "+this.getCantPremios() + " - " + cantidadPremios);
+            this.setCantPremios(cantidadPremios);
+            System.out.println("Despues " + this.getCantPremios() + " - " + cantidadPremios);
             this.mensajeGanador = mensaje;
             respuesta = new Respuesta(0, "Se modifico ficha correctamente.");
         }
@@ -353,7 +282,7 @@ public class Sistema {
          */
         String mensaje = "Los ganadores del sorteo son: \n";
 
-        if (cantPremios > participantes.size()) {
+        if (this.getCantPremios() > participantes.size()) {
             /**
              * Si la cantidad de premios es mas grande que los participantes le
              * doy un premio a cada participante
@@ -368,7 +297,7 @@ public class Sistema {
             /**
              * Sino, realizo el sorteo de los premios entre los participantes
              */
-            for (int i = 0; i < cantPremios; i++) {
+            for (int i = 0; i < this.getCantPremios(); i++) {
                 int random = (int) (Math.random() * (participantes.size() - 1));
                 /**
                  * genero un numero al azar entre 0 y el numero de participantes
@@ -391,12 +320,83 @@ public class Sistema {
                 }
             }
         }
-        System.out.println(cantPremios + " " + participantes.size());
+        System.out.println("En el sorteo:"+this.getCantPremios() + " - " + participantes.size());
         respuesta.setCod(0);
-        respuesta.setRespuesta(mensaje + cantPremios + " " + participantes.size());
+        respuesta.setRespuesta(mensaje + this.getCantPremios() + " " + participantes.size());
 
         return respuesta;
 
     }
 
+    
+    
+    public int getCantPremios() {
+        return cantPremios;
+    }
+
+    public void setCantPremios(int cantidadPremios) {
+        this.cantPremios = cantidadPremios;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+    
+     public void setFicha(Ficha ficha) {
+        this.ficha = ficha;
+    }
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+    
+
+    public ArrayList<Participante> getParticipantes() {
+        return participantes;
+    }
+        
+     public void setParticipantes(ArrayList<Participante> participantes) {
+        this.participantes = participantes;
+    }
+
+    public ArrayList<Participante> getGanadores() {
+        return ganadores;
+    }
+    
+    public void setGanadores(ArrayList<Participante> ganadores) {
+        this.ganadores = ganadores;
+    }
+
+
+    public ArrayList<Evaluacion> getEvaluaciones() {
+        return evaluaciones;
+    }
+
+    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
+    
+    
+     public ArrayList<String> getEmailEnviados() {
+        return emailEnviados;
+    }
+
+    public void setEmailEnviados(ArrayList<String> emailEnviados) {
+        this.emailEnviados = emailEnviados;
+    }
+
+    public String getMensajeGanador() {
+        return mensajeGanador;
+    }
+
+    public void setMensajeGanador(String mensajeGanador) {
+        this.mensajeGanador = mensajeGanador;
+    }
+
+   
+
+   
+     
+    
+
+    
 }

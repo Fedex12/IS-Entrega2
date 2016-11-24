@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SendMailSSL.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Entrega2&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">clases</a> &gt; <span class="el_source">SendMailSSL.java</span></div><h1>SendMailSSL.java</h1><pre class="source lang-java linenums">package clases;
+
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+
+<span class="nc" id="L13">public class SendMailSSL {/*</span>
+	public static void send(Participante participante) {
+		Properties props = new Properties();
+		props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);
+		props.put(&quot;mail.smtp.socketFactory.port&quot;, &quot;465&quot;);
+		props.put(&quot;mail.smtp.socketFactory.class&quot;,
+				&quot;javax.net.ssl.SSLSocketFactory&quot;);
+		props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);
+		props.put(&quot;mail.smtp.port&quot;, &quot;465&quot;);
+
+		Session session = Session.getDefaultInstance(props,
+			new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(&quot;restaurantes.no.reply&quot;,&quot;restaurantes1&quot;);
+				}
+			});
+
+		try {
+
+                        Message message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress(&quot;from@no-spam.com&quot;));
+                        message.setRecipients(Message.RecipientType.TO,
+                                        InternetAddress.parse(participante.getCliente().getEmail()));
+                        message.setSubject(&quot;Ha ganado un premio&quot;);
+                            message.setText(&quot;Felicitaciones,&quot; +
+                                            &quot;\n\n Felicitaciones, usted ha ganado un premio en uno de nuestros restaurantes\n\n&quot;
+                                    + &quot;Gracias pór participar!&quot;);
+
+                        Transport.send(message);
+			System.out.println(&quot;Done&quot;);
+
+		} catch (MessagingException e) {
+                    System.out.println(&quot;&quot;);
+                        
+		}
+	}*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

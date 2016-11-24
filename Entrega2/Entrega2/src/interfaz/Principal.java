@@ -14,6 +14,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
 
@@ -34,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Sistema sis) {
         initComponents();
         this.s = sis;
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         evaluacion = new Evaluacion();
        
         

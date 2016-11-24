@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.JFrame;
 import sistema.Sistema;
 
 /**
@@ -20,6 +21,7 @@ public class ModificarFicha extends javax.swing.JFrame {
      */
     public ModificarFicha(Sistema sis) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
         //TFComida = s.
     }

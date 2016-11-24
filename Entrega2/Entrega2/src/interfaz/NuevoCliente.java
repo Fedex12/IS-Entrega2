@@ -6,6 +6,7 @@
 package interfaz;
 
 import clases.Respuesta;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
 
@@ -21,6 +22,7 @@ public class NuevoCliente extends javax.swing.JFrame {
      */
     public NuevoCliente(Sistema sis) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
     }
 

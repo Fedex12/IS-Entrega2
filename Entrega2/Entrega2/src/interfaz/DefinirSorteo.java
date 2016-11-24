@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
 
@@ -21,6 +22,7 @@ public class DefinirSorteo extends javax.swing.JFrame {
      */
     public DefinirSorteo(Sistema sis) {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
         TFCtdad.setText(String.valueOf(s.getCantPremios()));
         TFMensaje.setText(s.getMensajeGanador());

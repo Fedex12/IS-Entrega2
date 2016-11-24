@@ -131,8 +131,9 @@ public class DefinirSorteo extends javax.swing.JFrame {
                 /*Se guardan los valores luego de corroborar que no son vacíos
                 y que la cantidad de premios es numérico
                 */
-                Respuesta r = s.definirSorteo(cantidad, TFMensaje.getText());
-                JOptionPane.showMessageDialog(null,r.getRespuesta(),
+                s.setCantPremios(cantidad);
+                s.setMensajeGanador(TFMensaje.getText());
+                JOptionPane.showMessageDialog(null,"Sorteo modificado con éxito",
                     "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
         }

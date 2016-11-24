@@ -135,6 +135,9 @@ public class DefinirSorteo extends javax.swing.JFrame {
                 s.setMensajeGanador(TFMensaje.getText());
                 JOptionPane.showMessageDialog(null,"Sorteo modificado con éxito",
                     "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null,"El sorteo no pudo ser modificado.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_BotonConfirmarActionPerformed

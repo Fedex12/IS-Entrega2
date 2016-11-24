@@ -17,6 +17,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import sistema.Sistema;
+import com.alee.laf.WebLookAndFeel;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -37,7 +40,7 @@ public class Principal extends javax.swing.JFrame {
         this.s = sis;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         evaluacion = new Evaluacion();
-       
+        
         
         //Inicialización del Combobox de clientes con uno vacío al principio
         ComboBoxClientes.setModel(new DefaultComboBoxModel(s.getClientes().toArray()));
@@ -210,10 +213,11 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal(s).setVisible(true);
+               
             }
         });
     }
-   
+    
     
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {

@@ -5,7 +5,10 @@
 */
 package interfaz;
 
+import com.alee.laf.WebLookAndFeel;
 import javax.swing.JOptionPane;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 import sistema.Sistema;
 
 /**
@@ -166,37 +169,46 @@ public class Bienvenida extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Bienvenida().setVisible(true);
-            }
-        });
+        try {
+            LookAndFeel lf = new WebLookAndFeel();
+            WebLookAndFeel.setDecorateFrames(true);
+            UIManager.setLookAndFeel(lf);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        /*try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+        break;
+        }
+        }
+        
+        } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }*/
+//</editor-fold>
+
+/* Create and display the form */
+java.awt.EventQueue.invokeLater(new Runnable() {
+    public void run() {
+        new Bienvenida().setVisible(true);
+    }
+});
     }
     
     public void populateData(){
-        //Precarga de datos
-        s.agregarCliente("Juan Pablo Gonzalez", "91827364", "098605049", "jpgonzalez@gmail.com");
-        s.agregarCliente("Federico Abreu", "12345678", "09626771", "fabreu@gmail.com");
-        s.agregarCliente("Adrian Perez", "876544321", "094324758", "aperez@outlook.com");
+//Precarga de datos
+s.agregarCliente("Juan Pablo Gonzalez", "91827364", "098605049", "jpgonzalez@gmail.com");
+s.agregarCliente("Federico Abreu", "12345678", "09626771", "fabreu@gmail.com");
+s.agregarCliente("Adrian Perez", "876544321", "094324758", "aperez@outlook.com");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

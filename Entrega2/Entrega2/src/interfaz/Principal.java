@@ -72,6 +72,7 @@ public class Principal extends javax.swing.JFrame {
         LabelPuntuacion = new javax.swing.JLabel();
         BotonEnviar = new javax.swing.JButton();
         BotonNuevoCli = new javax.swing.JButton();
+        CheckBoxAnonym = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,16 +153,21 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BotonEnviar);
-        BotonEnviar.setBounds(100, 420, 290, 60);
+        BotonEnviar.setBounds(110, 450, 290, 60);
 
-        BotonNuevoCli.setText("+");
+        BotonNuevoCli.setText("Nuevo cliente");
         BotonNuevoCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonNuevoCliActionPerformed(evt);
             }
         });
         jPanel1.add(BotonNuevoCli);
-        BotonNuevoCli.setBounds(210, 90, 60, 20);
+        BotonNuevoCli.setBounds(230, 90, 140, 20);
+
+        CheckBoxAnonym.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CheckBoxAnonym.setText("Evaluación anónima");
+        jPanel1.add(CheckBoxAnonym);
+        CheckBoxAnonym.setBounds(180, 390, 160, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,9 +180,8 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGap(0, 13, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -186,25 +191,35 @@ public class Principal extends javax.swing.JFrame {
         //Se envía una evaluación con/sin cliente dependiendo del seleccionado
         Respuesta r = null;
         estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));
-        if (ComboBoxClientes.getSelectedIndex() == 0){
+        if (CheckBoxAnonym.isSelected()){
             r = s.agregarEvaluacionAnonima(estrellas, TextAreaComentario.getText());
+            JOptionPane.showMessageDialog(null, r.getRespuesta(),
+                    "Evaluacion enviada con éxito!",
+                    JOptionPane.INFORMATION_MESSAGE);
+            TextAreaComentario.setText("");
+            ComboBoxClientes.setSelectedIndex(0);
+            RadioButton3.setSelected(true);
+        } else if (ComboBoxClientes.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un cliente.",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
             r = s.agregarEvaluacionIdentificada((Cliente) ComboBoxClientes.getSelectedItem(),
                     estrellas, TextAreaComentario.getText());
+            JOptionPane.showMessageDialog(null, r.getRespuesta(),
+                    "Evaluacion enviada con éxito!",
+                    JOptionPane.INFORMATION_MESSAGE);
+            TextAreaComentario.setText("");
+            ComboBoxClientes.setSelectedIndex(0);
+            RadioButton3.setSelected(true);
         }
-        JOptionPane.showMessageDialog(null, r.getRespuesta(),
-                "Evaluacion enviada con éxito!",
-                JOptionPane.INFORMATION_MESSAGE);
-        TextAreaComentario.setText("");
-        ComboBoxClientes.setSelectedIndex(0);
-        RadioButton3.setSelected(true);
     }//GEN-LAST:event_BotonEnviarActionPerformed
 
     private void BotonNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoCliActionPerformed
         //Se llama al frame para crear un nuevo cliente
         new NuevoCliente(s).setVisible(true);
     }//GEN-LAST:event_BotonNuevoCliActionPerformed
- 
+    
     
     //Método que devuelve el texto del Radio Button seleccionado
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
@@ -221,6 +236,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonEnviar;
     private javax.swing.JButton BotonNuevoCli;
+    private javax.swing.JCheckBox CheckBoxAnonym;
     private javax.swing.JComboBox<String> ComboBoxClientes;
     private javax.swing.JLabel LabelCliente;
     private javax.swing.JLabel LabelComentario;

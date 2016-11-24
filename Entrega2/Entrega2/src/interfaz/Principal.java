@@ -8,6 +8,7 @@ package interfaz;
 import clases.Cliente;
 import clases.Evaluacion;
 import clases.Participante;
+import clases.Respuesta;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -215,22 +216,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void BotonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEnviarActionPerformed
         //Se envía una evaluación con/sin cliente dependiendo del seleccionado
+        Respuesta r = null;
         estrellas = Integer.parseInt(getSelectedButtonText(buttonGroup1));
         if (ComboBoxClientes.getSelectedIndex() == 0){
-            s.agregarEvaluacionAnonima(estrellas, TextAreaComentario.getText());
-            JOptionPane.showMessageDialog(null, "La evaluación fue enviada con "
-                    + "éxito.\nLamentablemente, al no haber seleccionado cliente,"
-                    + "no tienes la posibilidad de participar en nuestro sorteo.",
-                    "Evaluacion enviada con éxito!",
-                    JOptionPane.INFORMATION_MESSAGE);
+            r = s.agregarEvaluacionAnonima(estrellas, TextAreaComentario.getText());
         } else {
-            s.agregarEvaluacionIdentificada((Cliente) ComboBoxClientes.getSelectedItem(),
+            r = s.agregarEvaluacionIdentificada((Cliente) ComboBoxClientes.getSelectedItem(),
                     estrellas, TextAreaComentario.getText());
-            JOptionPane.showMessageDialog(null, "La evaluación fue enviada con "
-                    + "éxito.\nRecuerda que tienes la posibilidad de ser elegido"
-                    + " ganador de nuestro sorteo!", "Evaluacion enviada con éxito!",
-                    JOptionPane.INFORMATION_MESSAGE);
         }
+        JOptionPane.showMessageDialog(null, r.getRespuesta(),
+                "Evaluacion enviada con éxito!",
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BotonEnviarActionPerformed
     
     /**

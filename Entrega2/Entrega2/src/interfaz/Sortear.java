@@ -5,9 +5,11 @@
  */
 package interfaz;
 
+import clases.Respuesta;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import sistema.Sistema;
 
@@ -105,7 +107,8 @@ public class Sortear extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSortearActionPerformed
-        // TODO add your handling code here:
+        Respuesta res = s.sortear();
+        JOptionPane.showMessageDialog(null,res.getRespuesta(),"Resultado del sorteo", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_BotonSortearActionPerformed
 
     /**

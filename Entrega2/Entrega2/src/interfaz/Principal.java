@@ -208,23 +208,7 @@ public class Principal extends javax.swing.JFrame {
     private void BotonNuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonNuevoCliActionPerformed
         new NuevoCliente(s).setVisible(true);
     }//GEN-LAST:event_BotonNuevoCliActionPerformed
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal(s).setVisible(true);
-               
-            }
-        });
-    }
-    
-    
+ 
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();

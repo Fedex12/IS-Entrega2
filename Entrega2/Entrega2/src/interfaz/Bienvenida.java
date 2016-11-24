@@ -6,6 +6,10 @@
 package interfaz;
 
 import com.alee.laf.WebLookAndFeel;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -47,6 +51,7 @@ public class Bienvenida extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         MIDefinirSorteo = new javax.swing.JMenuItem();
         MISortear = new javax.swing.JMenuItem();
+        MIFicha = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MISalir = new javax.swing.JMenuItem();
 
@@ -93,6 +98,14 @@ public class Bienvenida extends javax.swing.JFrame {
             }
         });
         jMenu2.add(MISortear);
+
+        MIFicha.setText("Modificar ficha");
+        MIFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MIFichaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MIFicha);
 
         jMenuBar1.add(jMenu2);
 
@@ -146,20 +159,69 @@ public class Bienvenida extends javax.swing.JFrame {
     }//GEN-LAST:event_MISalirActionPerformed
 
     private void MIEvaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIEvaluarActionPerformed
-        new Principal(s).setVisible(true);
+        JFrame j = this;
+        Principal p = new Principal(s);
+        p.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                j.setEnabled(true);
+            }
+        });
+        p.setVisible(true);
+        j.setEnabled(false);
     }//GEN-LAST:event_MIEvaluarActionPerformed
 
     private void MINuevoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MINuevoCliActionPerformed
-        new NuevoCliente(s).setVisible(true);
+        JFrame j = this;
+        NuevoCliente p = new NuevoCliente(s);
+        p.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                j.setEnabled(true);
+            }
+        });
+        p.setVisible(true);
+        j.setEnabled(false);
     }//GEN-LAST:event_MINuevoCliActionPerformed
 
     private void MISortearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MISortearActionPerformed
-        new Sortear(s).setVisible(true);
+        JFrame j = this;
+        Sortear p = new Sortear(s);
+        p.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                j.setEnabled(true);
+            }
+        });
+        p.setVisible(true);
+        j.setEnabled(false);
     }//GEN-LAST:event_MISortearActionPerformed
 
     private void MIDefinirSorteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIDefinirSorteoActionPerformed
-        new DefinirSorteo(s).setVisible(true);
+        JFrame j = this;
+        DefinirSorteo p = new DefinirSorteo(s);
+        p.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                j.setEnabled(true);
+            }
+        });
+        p.setVisible(true);
+        j.setEnabled(false);
     }//GEN-LAST:event_MIDefinirSorteoActionPerformed
+
+    private void MIFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIFichaActionPerformed
+        JFrame j = this;
+        ModificarFicha p = new ModificarFicha(s);
+        p.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                j.setEnabled(true);
+            }
+        });
+        p.setVisible(true);
+        j.setEnabled(false);
+    }//GEN-LAST:event_MIFichaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -215,6 +277,7 @@ s.agregarCliente("Adrian Perez", "876544321", "094324758", "aperez@outlook.com")
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MIDefinirSorteo;
     private javax.swing.JMenuItem MIEvaluar;
+    private javax.swing.JMenuItem MIFicha;
     private javax.swing.JMenuItem MINuevoCli;
     private javax.swing.JMenuItem MISalir;
     private javax.swing.JMenuItem MISortear;

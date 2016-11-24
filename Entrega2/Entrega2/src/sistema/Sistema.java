@@ -16,13 +16,6 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -207,7 +200,7 @@ public class Sistema {
     public Respuesta definirSorteo(int cantidadPremios, String mensaje) {
 
         Respuesta respuesta = new Respuesta(-1, "");
-        if (cantPremios <= 0) {
+        if (cantidadPremios <= 0) {
             /**
              * La cantidad de premios tiene que se mayor a cero
              */
@@ -298,7 +291,7 @@ public class Sistema {
              * Sino, realizo el sorteo de los premios entre los participantes
              */
             for (int i = 0; i < this.getCantPremios(); i++) {
-                int random = (int) (Math.random() * (participantes.size() - 1));
+                int random = (int) (Math.random() * (participantes.size() ));
                 /**
                  * genero un numero al azar entre 0 y el numero de participantes
                  */

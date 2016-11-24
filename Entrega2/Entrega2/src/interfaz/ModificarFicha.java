@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import clases.Ficha;
 import javax.swing.JFrame;
 import sistema.Sistema;
 
@@ -23,7 +24,10 @@ public class ModificarFicha extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
-        //TFComida = s.
+        TFComida.setText(s.getFicha().getTipoComida());
+        TFDireccion.setText(s.getFicha().getDireccion());
+        TFHorario.setText(s.getFicha().getHorario());
+        TFNombre.setText(s.getFicha().getNombre());
     }
 
     /**
@@ -131,7 +135,9 @@ public class ModificarFicha extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarActionPerformed
-        // TODO add your handling code here:
+        Ficha f = new Ficha(TFNombre.getText(), TFDireccion.getText(), TFHorario.getText(),
+                TFComida.getText());
+        s.setFicha(f);
     }//GEN-LAST:event_BotonConfirmarActionPerformed
 
     /**

@@ -115,6 +115,10 @@ public class Sistema {
     public ArrayList<Evaluacion> getEvaluaciones() {
         return evaluaciones;
     }
+    
+     public ArrayList<String> getEmailEnviados() {
+        return emailEnviados;
+    }
 
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
         Respuesta respuesta = new Respuesta(-1, "");

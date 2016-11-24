@@ -294,7 +294,7 @@ public class Sistema {
              */
             for (int i = 0; i < participantes.size(); i++) {
                 ganadores.add(participantes.get(i));
-                mensaje += participantes.get(i).getCliente().getNombre() + " Contacto: " + participantes.get(i).getCliente().getContacto() + " \n";
+                mensaje += participantes.get(i).getCliente().getNombre() + ": " + participantes.get(i).getCliente().getContacto() + " \n";
                 enviarMail(participantes.get(i));
                 
             }
@@ -314,7 +314,7 @@ public class Sistema {
                      * agrego como ganador
                      */
                     ganadores.add(ganador);
-                    mensaje += ganador.getCliente().getNombre() + " Contacto: " + ganador.getCliente().getContacto() + " \n";
+                    mensaje += ganador.getCliente().getNombre() + ": " + ganador.getCliente().getContacto() + " \n";
                     enviarMail(ganador);
                 } else {
                     /**

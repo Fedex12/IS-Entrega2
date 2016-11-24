@@ -309,7 +309,7 @@ public class SistemaTest {
     }
 
     @Test
-    public void testModificarFicha() {
+    public void testSetFicha() {
 
         String nombre = "NombrePrueba";
         String direccion = "DireccionPrueba";
@@ -317,7 +317,7 @@ public class SistemaTest {
         String tipoComida = "TipoComidaPrueba";
         Sistema instance = new Sistema();
         int expResult = 0;
-        Respuesta result = instance.modificarFicha(nombre, direccion, horario, tipoComida);
+        Respuesta result = instance.setFicha(nombre, direccion, horario, tipoComida);
         assertEquals(expResult, result.getCod());
         // TODO review the generated test code and remove the default call to fail.
 
@@ -399,6 +399,7 @@ public class SistemaTest {
         int expResult = 0;
         Cliente cliente = new Cliente(nombre, documento, contacto, email);
         instance.definirSorteo(cantidadPremios, mensaje);
+        System.out.println("Voy a sortear "+instance.getCantPremios());
         instance.agregarCliente(nombre, documento, contacto, email);
         instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
         Respuesta result = instance.sortear();

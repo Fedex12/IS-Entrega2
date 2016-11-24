@@ -93,9 +93,10 @@ public class ClienteTest {
        String documento= "Prueba documento";
        String email="Prueba email";
         Cliente instance = new Cliente(nombre, documento, contacto, email);
-        String expResult = nombre + "," + documento + "," + contacto + "," + email;
+        String expResult = nombre + " - " + documento + " - " + contacto + " - " + email;;
         
         String result = instance.toString();
+        
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
       

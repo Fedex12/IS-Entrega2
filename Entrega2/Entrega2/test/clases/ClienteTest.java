@@ -37,9 +37,7 @@ public class ClienteTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getNombre method, of class Cliente.
-     */
+
     @Test
     public void testGetNombre() {
         
@@ -52,12 +50,32 @@ public class ClienteTest {
       
     }
 
-    /**
-     * Test of setNombre method, of class Cliente.
-     */
+       @Test
+    public void testSetNombre() {
+        
+        Cliente instance = new Cliente();
+        String expResult = "NombrePrueba";
+        instance.setNombre(expResult);
+        String result = instance.getNombre();
+        assertEquals(expResult, result);
+        
+      
+    }
 
     @Test
     public void testGetDocumento() {
+       
+        Cliente instance = new Cliente();
+        String expResult = "PruebaDocumento";
+        instance.setDocumento(expResult);
+        String result = instance.getDocumento();
+        assertEquals(expResult, result);
+     
+      
+    }
+    
+     @Test
+    public void testSetDocumento() {
        
         Cliente instance = new Cliente();
         String expResult = "PruebaDocumento";
@@ -99,6 +117,17 @@ public class ClienteTest {
         assertEquals(expResult, result);
       
     }
+    
+       @Test
+    public void testSetContacto() {
+        
+        Cliente instance = new Cliente();
+        String expResult = "PruebaContacto";
+        instance.setContacto(expResult);
+        String result = instance.getContacto();
+        assertEquals(expResult, result);
+      
+    }
 
     /**
      * Test of setContacto method, of class Cliente.
@@ -118,6 +147,15 @@ public class ClienteTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
        
+    }
+    @Test
+    public void testSetEmail() {
+        
+        Cliente instance = new Cliente();
+        String expResult = "PruebaMail";
+        instance.setEmail(expResult);
+        String result = instance.getEmail();
+        assertEquals(expResult, result);  
     }
 
    @Test

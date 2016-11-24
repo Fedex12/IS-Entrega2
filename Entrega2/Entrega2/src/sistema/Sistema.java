@@ -50,28 +50,29 @@ public class Sistema {
         this.mensajeGanador = "Usted a ganador un sorteo por una comida gratis";
     }
 
-    public Respuesta agregarCliente(String nombre, String documento, String contacto, String mail) {
-        Respuesta respuesta = new Respuesta(-1, "");
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+    public Respuesta agregarCliente(String nombre, String documento, String contacto, String email) {
+        Respuesta respuesta = new Respuesta(-1, ""); 
+        /** Creo una expresion Regular para verificar que el email tiene formato Nombre@Dominio */
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$"; 
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(mail);
+        Matcher matcher = pattern.matcher(email);
 
-        if (nombre.isEmpty()) {
-            respuesta = new Respuesta(-1, "El mail no puede estar vacio.");
-        } else if (!matcher.matches()) {
+        if (nombre.isEmpty()) { /** Si el campo nombre esta vacio respondo error. */
+            respuesta = new Respuesta(-1, "El mail no puede estar vacio."); 
+        } else if (!matcher.matches()) { /** Si el email no tiene el formato correcto respondo error */
             respuesta = new Respuesta(-1, "El mail es incorrecto.");
         } else {
             boolean existe = false;
             for (int i = 0; i < clientes.size(); i++) {
-                if (documento == clientes.get(i).getDocumento()) {
+                if (documento == clientes.get(i).getDocumento()) { /** Recorro mis clientes y verifico que el cliente no este agregado previamente. */
                     existe = true;
                 }
             }
-            if (existe) {
+            if (existe) { /** Si ya existe el cliente que quiero agregar devuelvo error */
                 respuesta.setCod(-1);
                 respuesta.setRespuesta("Error: El documento ya existe en el sistema.");
-            } else {
-                Cliente cliente = new Cliente(nombre, documento, contacto, mail);
+            } else { /** Si todo esta correcto, agrego el cliente y respondo OK */
+                Cliente cliente = new Cliente(nombre, documento, contacto, email);
                 clientes.add(cliente);
                 respuesta.setCod(0);
                 respuesta.setRespuesta("Se agrego cliente correctamente.");
@@ -100,18 +101,19 @@ public class Sistema {
         Respuesta respuesta = new Respuesta(-1, "");
 
         Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
-        if (comentarios.isEmpty()) {
+         
+        if (comentarios.isEmpty()) { /** Si el comentario esta vacio devuelvo Error */
             respuesta = new Respuesta(-1, "El comentario no puede estar vacio.");
-        } else if (estrellas >= 1 && estrellas <= 5) {
+        } else if (estrellas >= 1 && estrellas <= 5) { /** Si la cantidad de estrella esta dentro del rango 1-5  */
 
-            Participante participante = new Participante(cliente);
-            if (participantes.contains(participante)) {
+            Participante participante = new Participante(cliente); /** creo un Participante a partir del cliente */
+            if (participantes.contains(participante)) { /** Si mi Participante ya participo previamente le agrego la nueva evaluacio al Participante y a mi lista de evaluaciones, respuesta OK */
                 int indice = participantes.indexOf(participante);
                 participantes.get(indice).agregarEvaluacion(evaluacion);
 
                 respuesta.setCod(0);
                 respuesta.setRespuesta("Se agrego la evaluacion correspondiente a participante " + participantes.get(indice).getCliente().getNombre());
-            } else {
+            } else { /** Si el Participante no tiene ninguna evaluacion previa, le agrego la evaluacion y los agrego a mi lista. */
 
                 participante.agregarEvaluacion(evaluacion);
                 participantes.add(participante);
@@ -119,7 +121,7 @@ public class Sistema {
                 respuesta.setRespuesta("Evaluacion agregada, se agrego al cliente entre los participantes del sorteo");
             }
 
-        } else {
+        } else {  /** Si las estrella estan fuera del rango 1-5, respondo Error */
             respuesta = new Respuesta(-1, "Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.");
         }
         return respuesta;
@@ -129,20 +131,20 @@ public class Sistema {
         Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);
         Respuesta respuesta = new Respuesta(-1, "");
         boolean seAgrego = false;
-        if (comentarios.isEmpty()) {
+        if (comentarios.isEmpty()) { /** Si el comentario esta vacio devuelvo Error */
             respuesta = new Respuesta(-1, "El comentario no puede estar vacio.");
-        } else if (estrellas >= 1 && estrellas <= 5) {
-            evaluaciones.add(evaluacion);
-            respuesta.setCod(0);
+        } else if (estrellas >= 1 && estrellas <= 5) { /** Si la cantidad de estrella esta dentro del rango 1-5  */
+            evaluaciones.add(evaluacion); /** Si todo esta bien agrego la evaluacion a mi lista  */
+            respuesta.setCod(0); 
             respuesta.setRespuesta("Se agrego evalucion correctamente.");
-        } else {
+        } else { /** Si las estrella estan fuera del rango 1-5, respondo Error */
             respuesta.setRespuesta("Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.");
         }
         return respuesta;
     }
 
     public Respuesta modificarFicha(String nombre, String direccion, String horario, String tipoComida) {
-        Respuesta respuesta = new Respuesta(-1, "");
+        Respuesta respuesta = new Respuesta(-1, ""); /** Como la ficha no es relevante en el funcionamiento del programa permito que se le ingrese Strings con cualquier formato o vacios.  */
         this.ficha.setNombre(nombre);
         this.ficha.setDireccion(direccion);
         this.ficha.setHorario(horario);
@@ -152,16 +154,17 @@ public class Sistema {
         return respuesta;
     }
 
-    public Respuesta definirSorteo(int cantidadPremios, String mensaje) {
+    public Respuesta definirSorteo(int cantPremios, String mensaje) {
 
         Respuesta respuesta = new Respuesta(-1, "");
-        if (cantidadPremios <= 0) {
+        if (cantPremios <= 0) { /** La cantidad de premios tiene que se mayor a cero  */
             respuesta = new Respuesta(-1, "La cantidad de premios debe ser mayor a cero.");
-        } else if (mensaje.isEmpty()) {
-            respuesta = new Respuesta(-1, "El mensaje no puede estar vacio.");
-        } else {
-
-            this.cantPremios = cantidadPremios;
+        } else if (mensaje.length()<20) { /** Si el mensaje tiene menos de 20 caracteres */
+            respuesta = new Respuesta(-1, "El mensaje debe contener por lo menos 20 caracteres");
+        } else { /** Si todo es correcto*/
+            System.out.println(this.cantPremios+" - "+cantPremios);
+            this.cantPremios = cantPremios;
+            System.out.println("Despues "+this.cantPremios+" - "+cantPremios);
             this.mensajeGanador = mensaje;
             respuesta = new Respuesta(0, "Se modifico ficha correctamente.");
         }
@@ -169,10 +172,10 @@ public class Sistema {
     }
 
     public Respuesta enviarMail(Participante participante) {
-        Respuesta respuesta = new Respuesta(0, "Todo ok");
+        Respuesta respuesta = new Respuesta(0, "");
         String mail = "To:" + participante.getCliente().getContacto() + "\n";
-        mail = participante.getCliente().getNombre() + ".\n" + mensajeGanador;
-        emailEnviados.add(mail);
+        mail = participante.getCliente().getNombre() + ".\n\n" + mensajeGanador;
+        emailEnviados.add(mail); /** Agrego el mail a mi lista de enviados*/
         final String username = "ingenieriasoftwareort@gmail.com";
         final String password = "Hola1234";
 
@@ -211,31 +214,32 @@ public class Sistema {
     public Respuesta sortear() {
         Respuesta respuesta = new Respuesta(-1, "");
         Random rnd = new Random();
-        ganadores = new ArrayList<Participante>();
+        ganadores = new ArrayList<Participante>(); /** limpio mi lista de ganadores*/
         String mensaje = "Los ganadores del sorteo son: \n";
         
-        if (cantPremios > participantes.size()) {
+        if (cantPremios > participantes.size()) { /** Si la cantidad de premios es mas grande que los participantes le doy un premio a cada participante*/
             for (int i = 0; i < participantes.size(); i++) {
                 ganadores.add(participantes.get(i));
                 mensaje += participantes.get(i).getCliente().getNombre() + " Contacto: " + participantes.get(i).getCliente().getContacto() + " \n";
                 enviarMail(participantes.get(i));
 
             }
-        } else {
+        } else { /** Sino, realizo el sorteo de los premios entre los participantes*/
             for (int i = 0; i < cantPremios; i++) {
-                int random = (int)(Math.random()*(participantes.size()));
+                int random = (int)(Math.random()*(participantes.size()-1)); /** genero un numero al azar entre 0 y el numero de participantes*/
                 Participante ganador = participantes.get(random);
-                if (!ganadores.contains(ganador)) {
+                if (!ganadores.contains(ganador)) { /** si el participante sorteado aun no gano ningun premio lo agrego como ganador*/
                     ganadores.add(ganador);
                     mensaje += ganador.getCliente().getNombre() + " Contacto: " + ganador.getCliente().getContacto() + " \n";
                     enviarMail(ganador);
-                } else {
+                } else { /** si el partipante sorteado ya gano un premio entonces vuelvo a sortear*/
                     i--;
                 }
             }
         }
+        System.out.println(cantPremios+" "+participantes.size());
         respuesta.setCod(0);
-        respuesta.setRespuesta(mensaje);
+        respuesta.setRespuesta(mensaje+cantPremios+" "+participantes.size());
 
         return respuesta;
 

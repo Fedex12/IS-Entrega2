@@ -352,7 +352,7 @@ public class SistemaTest {
     public void testDifinirSorteoOK() {
         
         int cantidadPremios = 3;
-        String mensaje = "MensajePrueba";
+        String mensaje = "Mensaje de Prueba con largo suficiente";
         int expResult = 0;
         
         Sistema instance = new Sistema();
@@ -379,7 +379,7 @@ public class SistemaTest {
     public void testDifinirSorteoCantidadPremiosNegativos() {
         
         int cantidadPremios = -3;
-        String mensaje = "MensajePrueba";
+        String mensaje = "Mensaje de Prueba con largo suficiente";
         int expResult = -1;
         
         Sistema instance = new Sistema();

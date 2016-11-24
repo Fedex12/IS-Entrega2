@@ -24,6 +24,7 @@ public class Bienvenida extends javax.swing.JFrame {
      */
     public Bienvenida() {
         initComponents();
+        this.setResizable(false);
         s = new Sistema();
         //Se precargan datos
         populateData();

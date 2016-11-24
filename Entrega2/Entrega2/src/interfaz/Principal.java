@@ -38,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Sistema sis) {
         initComponents();
         this.s = sis;
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         evaluacion = new Evaluacion();
         
@@ -81,31 +82,34 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        LabelTitulo.setText("Formulario para evaluar la atención obtenida en el restaurante");
+        LabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        LabelTitulo.setText("Evaluar restaurante");
         jPanel1.add(LabelTitulo);
-        LabelTitulo.setBounds(120, 60, 359, 16);
+        LabelTitulo.setBounds(170, 20, 190, 22);
 
         ComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(ComboBoxClientes);
-        ComboBoxClientes.setBounds(160, 110, 64, 22);
+        ComboBoxClientes.setBounds(140, 90, 64, 22);
 
+        LabelCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelCliente.setText("Cliente:");
         jPanel1.add(LabelCliente);
-        LabelCliente.setBounds(80, 120, 44, 16);
+        LabelCliente.setBounds(60, 90, 50, 20);
 
+        LabelComentario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelComentario.setText("Comentario:");
         jPanel1.add(LabelComentario);
-        LabelComentario.setBounds(60, 200, 71, 16);
+        LabelComentario.setBounds(30, 170, 76, 17);
 
         LabelMalo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LabelMalo.setText("Malo");
         jPanel1.add(LabelMalo);
-        LabelMalo.setBounds(160, 150, 40, 22);
+        LabelMalo.setBounds(150, 130, 40, 22);
 
         LabelExcelente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LabelExcelente.setText("Excelente");
         jPanel1.add(LabelExcelente);
-        LabelExcelente.setBounds(420, 150, 90, 22);
+        LabelExcelente.setBounds(410, 130, 90, 22);
 
         TextAreaComentario.setColumns(20);
         TextAreaComentario.setRows(5);
@@ -113,38 +117,39 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TextAreaComentario);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(50, 230, 640, 173);
+        jScrollPane1.setBounds(30, 200, 460, 173);
 
         buttonGroup1.add(RadioButton1);
-        RadioButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         RadioButton1.setText("1");
         jPanel1.add(RadioButton1);
-        RadioButton1.setBounds(200, 150, 40, 25);
+        RadioButton1.setBounds(200, 130, 40, 25);
 
         buttonGroup1.add(RadioButton2);
         RadioButton2.setText("2");
         jPanel1.add(RadioButton2);
-        RadioButton2.setBounds(250, 150, 35, 25);
+        RadioButton2.setBounds(240, 130, 35, 25);
 
         buttonGroup1.add(RadioButton3);
         RadioButton3.setText("3");
         jPanel1.add(RadioButton3);
-        RadioButton3.setBounds(290, 150, 35, 25);
+        RadioButton3.setBounds(280, 130, 35, 25);
 
         buttonGroup1.add(RadioButton4);
         RadioButton4.setText("4");
         jPanel1.add(RadioButton4);
-        RadioButton4.setBounds(330, 150, 35, 25);
+        RadioButton4.setBounds(320, 130, 35, 25);
 
         buttonGroup1.add(RadioButton5);
         RadioButton5.setText("5");
         jPanel1.add(RadioButton5);
-        RadioButton5.setBounds(370, 150, 35, 25);
+        RadioButton5.setBounds(360, 130, 35, 25);
 
+        LabelPuntuacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelPuntuacion.setText("Puntuación:");
         jPanel1.add(LabelPuntuacion);
-        LabelPuntuacion.setBounds(60, 150, 67, 16);
+        LabelPuntuacion.setBounds(30, 130, 74, 17);
 
+        BotonEnviar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         BotonEnviar.setText("ENVIAR");
         BotonEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BotonEnviar);
-        BotonEnviar.setBounds(230, 430, 290, 60);
+        BotonEnviar.setBounds(100, 420, 290, 60);
 
         BotonNuevoCli.setText("+");
         BotonNuevoCli.addActionListener(new java.awt.event.ActionListener() {
@@ -161,21 +166,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BotonNuevoCli);
-        BotonNuevoCli.setBounds(250, 110, 40, 25);
+        BotonNuevoCli.setBounds(210, 90, 60, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 28, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         pack();

@@ -28,6 +28,7 @@ public class Sortear extends javax.swing.JFrame {
      */
     public Sortear(Sistema sis) {
         initComponents();
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
         cargarLista();
@@ -49,6 +50,7 @@ public class Sortear extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        LabelEmails.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LabelEmails.setText("Emails enviados a los ganadores:");
 
         ListaGanadores.setModel(new javax.swing.AbstractListModel<String>() {
@@ -58,7 +60,8 @@ public class Sortear extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ListaGanadores);
 
-        BotonSortear.setText("SORTEAR");
+        BotonSortear.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        BotonSortear.setText("NUEVO SORTEO");
         BotonSortear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSortearActionPerformed(evt);
@@ -77,12 +80,12 @@ public class Sortear extends javax.swing.JFrame {
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(LabelEmails)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 151, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(BotonSortear, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BotonSortear, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +96,7 @@ public class Sortear extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BotonSortear, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();

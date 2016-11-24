@@ -22,6 +22,7 @@ public class ModificarFicha extends javax.swing.JFrame {
      */
     public ModificarFicha(Sistema sis) {
         initComponents();
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.s = sis;
         TFComida.setText(s.getFicha().getTipoComida());

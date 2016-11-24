@@ -46,144 +46,212 @@ public class Sistema {
 <span class="fc" id="L46">        this.evaluaciones = new ArrayList&lt;Evaluacion&gt;();</span>
 <span class="fc" id="L47">        this.emailEnviados = new ArrayList&lt;String&gt;();</span>
 <span class="fc" id="L48">        this.ficha = new Ficha();</span>
-<span class="fc" id="L49">        this.cantPremios = 1;</span>
+<span class="fc" id="L49">        this.cantPremios = 2;</span>
 <span class="fc" id="L50">        this.mensajeGanador = &quot;Usted a ganador un sorteo por una comida gratis&quot;;</span>
 <span class="fc" id="L51">    }</span>
 
     public Respuesta agregarCliente(String nombre, String documento, String contacto, String email) {
-<span class="fc" id="L54">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;); </span>
-        /** Creo una expresion Regular para verificar que el email tiene formato Nombre@Dominio */
-<span class="fc" id="L56">        String regex = &quot;^[A-Za-z0-9+_.-]+@(.+)$&quot;; </span>
-<span class="fc" id="L57">        Pattern pattern = Pattern.compile(regex);</span>
-<span class="fc" id="L58">        Matcher matcher = pattern.matcher(email);</span>
+<span class="fc" id="L54">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+        /**
+         * Creo una expresion Regular para verificar que el email tiene formato
+         * Nombre@Dominio
+         */
+<span class="fc" id="L59">        String regex = &quot;^[A-Za-z0-9+_.-]+@(.+)$&quot;;</span>
+<span class="fc" id="L60">        Pattern pattern = Pattern.compile(regex);</span>
+<span class="fc" id="L61">        Matcher matcher = pattern.matcher(email);</span>
 
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (nombre.isEmpty()) { /** Si el campo nombre esta vacio respondo error. */</span>
-<span class="fc" id="L61">            respuesta = new Respuesta(-1, &quot;El mail no puede estar vacio.&quot;); </span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        } else if (!matcher.matches()) { /** Si el email no tiene el formato correcto respondo error */</span>
-<span class="fc" id="L63">            respuesta = new Respuesta(-1, &quot;El mail es incorrecto.&quot;);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (nombre.isEmpty()) {</span>
+            /**
+             * Si el campo nombre esta vacio respondo error.
+             */
+<span class="fc" id="L67">            respuesta = new Respuesta(-1, &quot;El mail no puede estar vacio.&quot;);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        } else if (!matcher.matches()) {</span>
+            /**
+             * Si el email no tiene el formato correcto respondo error
+             */
+<span class="fc" id="L72">            respuesta = new Respuesta(-1, &quot;El mail es incorrecto.&quot;);</span>
         } else {
-<span class="fc" id="L65">            boolean existe = false;</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int i = 0; i &lt; clientes.size(); i++) {</span>
-<span class="fc bfc" id="L67" title="All 2 branches covered.">                if (documento == clientes.get(i).getDocumento()) { /** Recorro mis clientes y verifico que el cliente no este agregado previamente. */</span>
-<span class="fc" id="L68">                    existe = true;</span>
+<span class="fc" id="L74">            boolean existe = false;</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            for (int i = 0; i &lt; clientes.size(); i++) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">                if (documento == clientes.get(i).getDocumento()) {</span>
+                    /**
+                     * Recorro mis clientes y verifico que el cliente no este
+                     * agregado previamente.
+                     */
+<span class="fc" id="L81">                    existe = true;</span>
                 }
             }
-<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (existe) { /** Si ya existe el cliente que quiero agregar devuelvo error */</span>
-<span class="fc" id="L72">                respuesta.setCod(-1);</span>
-<span class="fc" id="L73">                respuesta.setRespuesta(&quot;Error: El documento ya existe en el sistema.&quot;);</span>
-            } else { /** Si todo esta correcto, agrego el cliente y respondo OK */
-<span class="fc" id="L75">                Cliente cliente = new Cliente(nombre, documento, contacto, email);</span>
-<span class="fc" id="L76">                clientes.add(cliente);</span>
-<span class="fc" id="L77">                respuesta.setCod(0);</span>
-<span class="fc" id="L78">                respuesta.setRespuesta(&quot;Se agrego cliente correctamente.&quot;);</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            if (existe) {</span>
+                /**
+                 * Si ya existe el cliente que quiero agregar devuelvo error
+                 */
+<span class="fc" id="L88">                respuesta.setCod(-1);</span>
+<span class="fc" id="L89">                respuesta.setRespuesta(&quot;Error: El documento ya existe en el sistema.&quot;);</span>
+            } else {
+                /**
+                 * Si todo esta correcto, agrego el cliente y respondo OK
+                 */
+<span class="fc" id="L94">                Cliente cliente = new Cliente(nombre, documento, contacto, email);</span>
+<span class="fc" id="L95">                clientes.add(cliente);</span>
+<span class="fc" id="L96">                respuesta.setCod(0);</span>
+<span class="fc" id="L97">                respuesta.setRespuesta(&quot;Se agrego cliente correctamente.&quot;);</span>
             }
         }
-<span class="fc" id="L81">        return respuesta;</span>
+<span class="fc" id="L100">        return respuesta;</span>
     }
 
     public ArrayList&lt;Cliente&gt; getClientes() {
-<span class="fc" id="L85">        return clientes;</span>
+<span class="fc" id="L104">        return clientes;</span>
     }
 
     public ArrayList&lt;Participante&gt; getParticipantes() {
-<span class="fc" id="L89">        return participantes;</span>
+<span class="fc" id="L108">        return participantes;</span>
     }
 
     public ArrayList&lt;Participante&gt; getGanadores() {
-<span class="fc" id="L93">        return ganadores;</span>
+<span class="fc" id="L112">        return ganadores;</span>
     }
 
     public ArrayList&lt;Evaluacion&gt; getEvaluaciones() {
-<span class="fc" id="L97">        return evaluaciones;</span>
+<span class="fc" id="L116">        return evaluaciones;</span>
     }
 
     public Respuesta agregarEvaluacionIdentificada(Cliente cliente, int estrellas, String comentarios) {
-<span class="fc" id="L101">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+<span class="fc" id="L120">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
 
-<span class="fc" id="L103">        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);</span>
-         
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (comentarios.isEmpty()) { /** Si el comentario esta vacio devuelvo Error */</span>
-<span class="fc" id="L106">            respuesta = new Respuesta(-1, &quot;El comentario no puede estar vacio.&quot;);</span>
-<span class="fc bfc" id="L107" title="All 4 branches covered.">        } else if (estrellas &gt;= 1 &amp;&amp; estrellas &lt;= 5) { /** Si la cantidad de estrella esta dentro del rango 1-5  */</span>
+<span class="fc" id="L122">        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);</span>
+<span class="fc bfc" id="L123" title="All 4 branches covered.">        if (estrellas &gt;= 1 &amp;&amp; estrellas &lt;= 5) {</span>
+            /**
+             * Si la cantidad de estrella esta dentro del rango 1-5
+             */
 
-<span class="fc" id="L109">            Participante participante = new Participante(cliente); /** creo un Participante a partir del cliente */</span>
-<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (participantes.contains(participante)) { /** Si mi Participante ya participo previamente le agrego la nueva evaluacio al Participante y a mi lista de evaluaciones, respuesta OK */</span>
-<span class="fc" id="L111">                int indice = participantes.indexOf(participante);</span>
-<span class="fc" id="L112">                participantes.get(indice).agregarEvaluacion(evaluacion);</span>
+<span class="fc" id="L128">            Participante participante = new Participante(cliente);</span>
+            /**
+             * creo un Participante a partir del cliente
+             */
+<span class="fc bfc" id="L132" title="All 2 branches covered.">            if (participantes.contains(participante)) {</span>
+                /**
+                 * Si mi Participante ya participo previamente le agrego la
+                 * nueva evaluacio al Participante y a mi lista de evaluaciones,
+                 * respuesta OK
+                 */
+<span class="fc" id="L138">                int indice = participantes.indexOf(participante);</span>
+<span class="fc" id="L139">                participantes.get(indice).agregarEvaluacion(evaluacion);</span>
 
-<span class="fc" id="L114">                respuesta.setCod(0);</span>
-<span class="fc" id="L115">                respuesta.setRespuesta(&quot;Se agrego la evaluacion correspondiente a participante &quot; + participantes.get(indice).getCliente().getNombre());</span>
-<span class="fc" id="L116">            } else { /** Si el Participante no tiene ninguna evaluacion previa, le agrego la evaluacion y los agrego a mi lista. */</span>
+<span class="fc" id="L141">                respuesta.setCod(0);</span>
+<span class="fc" id="L142">                respuesta.setRespuesta(&quot;Se agrego la evaluacion correspondiente a participante &quot; + participantes.get(indice).getCliente().getNombre());</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            } else if (clientes.contains(cliente)) {</span>
+                
+<span class="fc" id="L145">                evaluaciones.add(evaluacion);</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">                if (comentarios.trim().isEmpty()) {</span>
+                    /** Si la reseña esta vacia no lo agrego a los participantes.*/
+<span class="fc" id="L148">                    respuesta.setCod(0);</span>
+<span class="fc" id="L149">                    respuesta.setRespuesta(&quot;Se agrego evaluacion, ya que esta no tiene comentarios no califica para el sorteo.&quot;);</span>
 
-<span class="fc" id="L118">                participante.agregarEvaluacion(evaluacion);</span>
-<span class="fc" id="L119">                participantes.add(participante);</span>
-<span class="fc" id="L120">                respuesta.setCod(0);</span>
-<span class="fc" id="L121">                respuesta.setRespuesta(&quot;Evaluacion agregada, se agrego al cliente entre los participantes del sorteo&quot;);</span>
+                } else {
+                    /**
+                    * Si el Participante no tiene ninguna evaluacion previa, le
+                    * agrego la evaluacion y los agrego a mi lista.
+                    */
+<span class="fc" id="L156">                    participante.agregarEvaluacion(evaluacion);</span>
+<span class="fc" id="L157">                    participantes.add(participante);</span>
+<span class="fc" id="L158">                    respuesta.setCod(0);</span>
+<span class="fc" id="L159">                    respuesta.setRespuesta(&quot;Evaluacion agregada, se agrego al cliente entre los participantes del sorteo&quot;);</span>
+                }
+            } else {
+<span class="nc" id="L162">                respuesta.setCod(-1);</span>
+<span class="nc" id="L163">                respuesta.setRespuesta(&quot;Error: El cliente no esta registrado.&quot;);</span>
             }
 
-<span class="fc" id="L124">        } else {  /** Si las estrella estan fuera del rango 1-5, respondo Error */</span>
-<span class="fc" id="L125">            respuesta = new Respuesta(-1, &quot;Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.&quot;);</span>
+<span class="fc" id="L166">        } else {</span>
+            /**
+             * Si las estrella estan fuera del rango 1-5, respondo Error
+             */
+<span class="fc" id="L170">            respuesta = new Respuesta(-1, &quot;Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.&quot;);</span>
         }
-<span class="fc" id="L127">        return respuesta;</span>
+<span class="fc" id="L172">        return respuesta;</span>
     }
 
     public Respuesta agregarEvaluacionAnonima(int estrellas, String comentarios) {
-<span class="fc" id="L131">        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);</span>
-<span class="fc" id="L132">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
-<span class="fc" id="L133">        boolean seAgrego = false;</span>
-<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (comentarios.isEmpty()) { /** Si el comentario esta vacio devuelvo Error */</span>
-<span class="fc" id="L135">            respuesta = new Respuesta(-1, &quot;El comentario no puede estar vacio.&quot;);</span>
-<span class="fc bfc" id="L136" title="All 4 branches covered.">        } else if (estrellas &gt;= 1 &amp;&amp; estrellas &lt;= 5) { /** Si la cantidad de estrella esta dentro del rango 1-5  */</span>
-<span class="fc" id="L137">            evaluaciones.add(evaluacion); /** Si todo esta bien agrego la evaluacion a mi lista  */</span>
-<span class="fc" id="L138">            respuesta.setCod(0); </span>
-<span class="fc" id="L139">            respuesta.setRespuesta(&quot;Se agrego evalucion correctamente.&quot;);</span>
-        } else { /** Si las estrella estan fuera del rango 1-5, respondo Error */
-<span class="fc" id="L141">            respuesta.setRespuesta(&quot;Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.&quot;);</span>
+<span class="fc" id="L176">        Evaluacion evaluacion = new Evaluacion(estrellas, comentarios);</span>
+<span class="fc" id="L177">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+<span class="fc" id="L178">        boolean seAgrego = false;</span>
+<span class="fc bfc" id="L179" title="All 4 branches covered.">        if (estrellas &gt;= 1 &amp;&amp; estrellas &lt;= 5) {</span>
+            /**
+             * Si la cantidad de estrella esta dentro del rango 1-5
+             */
+<span class="fc" id="L183">            evaluaciones.add(evaluacion);</span>
+            /**
+             * Si todo esta bien agrego la evaluacion a mi lista
+             */
+<span class="fc" id="L187">            respuesta.setCod(0);</span>
+<span class="fc" id="L188">            respuesta.setRespuesta(&quot;Se agrego evalucion correctamente.&quot;);</span>
+        } else {
+            /**
+             * Si las estrella estan fuera del rango 1-5, respondo Error
+             */
+<span class="fc" id="L193">            respuesta.setRespuesta(&quot;Cantidad de estrellas no validas, debe de estar comprendida entre 1 y 5.&quot;);</span>
         }
-<span class="fc" id="L143">        return respuesta;</span>
+<span class="fc" id="L195">        return respuesta;</span>
     }
 
     public Respuesta modificarFicha(String nombre, String direccion, String horario, String tipoComida) {
-<span class="fc" id="L147">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;); /** Como la ficha no es relevante en el funcionamiento del programa permito que se le ingrese Strings con cualquier formato o vacios.  */</span>
-<span class="fc" id="L148">        this.ficha.setNombre(nombre);</span>
-<span class="fc" id="L149">        this.ficha.setDireccion(direccion);</span>
-<span class="fc" id="L150">        this.ficha.setHorario(horario);</span>
-<span class="fc" id="L151">        this.ficha.setTipoComida(tipoComida);</span>
-<span class="fc" id="L152">        respuesta.setCod(0);</span>
-<span class="fc" id="L153">        respuesta.setRespuesta(&quot;Se modifico Ficha correctamente&quot;);</span>
-<span class="fc" id="L154">        return respuesta;</span>
+<span class="fc" id="L199">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+        /**
+         * Como la ficha no es relevante en el funcionamiento del programa
+         * permito que se le ingrese Strings con cualquier formato o vacios.
+         */
+<span class="fc" id="L204">        this.ficha.setNombre(nombre);</span>
+<span class="fc" id="L205">        this.ficha.setDireccion(direccion);</span>
+<span class="fc" id="L206">        this.ficha.setHorario(horario);</span>
+<span class="fc" id="L207">        this.ficha.setTipoComida(tipoComida);</span>
+<span class="fc" id="L208">        respuesta.setCod(0);</span>
+<span class="fc" id="L209">        respuesta.setRespuesta(&quot;Se modifico Ficha correctamente&quot;);</span>
+<span class="fc" id="L210">        return respuesta;</span>
     }
 
     public Respuesta definirSorteo(int cantPremios, String mensaje) {
 
-<span class="fc" id="L159">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
-<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (cantPremios &lt;= 0) { /** La cantidad de premios tiene que se mayor a cero  */</span>
-<span class="fc" id="L161">            respuesta = new Respuesta(-1, &quot;La cantidad de premios debe ser mayor a cero.&quot;);</span>
-<span class="fc bfc" id="L162" title="All 2 branches covered.">        } else if (mensaje.length()&lt;20) { /** Si el mensaje tiene menos de 20 caracteres */</span>
-<span class="fc" id="L163">            respuesta = new Respuesta(-1, &quot;El mensaje debe contener por lo menos 20 caracteres&quot;);</span>
-        } else { /** Si todo es correcto*/
-<span class="fc" id="L165">            System.out.println(this.cantPremios+&quot; - &quot;+cantPremios);</span>
-<span class="fc" id="L166">            this.cantPremios = cantPremios;</span>
-<span class="fc" id="L167">            System.out.println(&quot;Despues &quot;+this.cantPremios+&quot; - &quot;+cantPremios);</span>
-<span class="fc" id="L168">            this.mensajeGanador = mensaje;</span>
-<span class="fc" id="L169">            respuesta = new Respuesta(0, &quot;Se modifico ficha correctamente.&quot;);</span>
+<span class="fc" id="L215">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        if (cantPremios &lt;= 0) {</span>
+            /**
+             * La cantidad de premios tiene que se mayor a cero
+             */
+<span class="fc" id="L220">            respuesta = new Respuesta(-1, &quot;La cantidad de premios debe ser mayor a cero.&quot;);</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">        } else if (mensaje.length() &lt; 20) {</span>
+            /**
+             * Si el mensaje tiene menos de 20 caracteres
+             */
+<span class="fc" id="L225">            respuesta = new Respuesta(-1, &quot;El mensaje debe contener por lo menos 20 caracteres&quot;);</span>
+        } else {
+            /**
+             * Si todo es correcto
+             */
+<span class="fc" id="L230">            System.out.println(this.cantPremios + &quot; - &quot; + cantPremios);</span>
+<span class="fc" id="L231">            this.cantPremios = cantPremios;</span>
+<span class="fc" id="L232">            System.out.println(&quot;Despues &quot; + this.cantPremios + &quot; - &quot; + cantPremios);</span>
+<span class="fc" id="L233">            this.mensajeGanador = mensaje;</span>
+<span class="fc" id="L234">            respuesta = new Respuesta(0, &quot;Se modifico ficha correctamente.&quot;);</span>
         }
-<span class="fc" id="L171">        return respuesta;</span>
+<span class="fc" id="L236">        return respuesta;</span>
     }
 
     public Respuesta enviarMail(Participante participante) {
-<span class="fc" id="L175">        Respuesta respuesta = new Respuesta(0, &quot;&quot;);</span>
-<span class="fc" id="L176">        String mail = &quot;To:&quot; + participante.getCliente().getContacto() + &quot;\n&quot;;</span>
-<span class="fc" id="L177">        mail = participante.getCliente().getNombre() + &quot;.\n\n&quot; + mensajeGanador;</span>
-<span class="fc" id="L178">        emailEnviados.add(mail); /** Agrego el mail a mi lista de enviados*/</span>
-<span class="fc" id="L179">        final String username = &quot;ingenieriasoftwareort@gmail.com&quot;;</span>
-<span class="fc" id="L180">        final String password = &quot;Hola1234&quot;;</span>
+<span class="fc" id="L240">        Respuesta respuesta = new Respuesta(0, &quot;&quot;);</span>
+<span class="fc" id="L241">        String mail = &quot;To:&quot; + participante.getCliente().getContacto() + &quot;\n&quot;;</span>
+<span class="fc" id="L242">        mail = participante.getCliente().getNombre() + &quot;.\n\n&quot; + mensajeGanador;</span>
+<span class="fc" id="L243">        emailEnviados.add(mail);</span>
+        /**
+         * Agrego el mail a mi lista de enviados
+         */
+<span class="fc" id="L247">        final String username = &quot;ingenieriasoftwareort@gmail.com&quot;;</span>
+<span class="fc" id="L248">        final String password = &quot;Hola1234&quot;;</span>
 
-<span class="fc" id="L182">        Properties props = new Properties();</span>
-<span class="fc" id="L183">        props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L184">        props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L185">        props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
-<span class="fc" id="L186">        props.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
+<span class="fc" id="L250">        Properties props = new Properties();</span>
+<span class="fc" id="L251">        props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L252">        props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L253">        props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
+<span class="fc" id="L254">        props.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
         /*
          Session session = Session.getInstance(props,
          new javax.mail.Authenticator() {
@@ -208,40 +276,61 @@ public class Sistema {
          throw new RuntimeException(e);
          }
          */
-<span class="fc" id="L211">        return respuesta;</span>
+<span class="fc" id="L279">        return respuesta;</span>
     }
 
     public Respuesta sortear() {
-<span class="fc" id="L215">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
-<span class="fc" id="L216">        Random rnd = new Random();</span>
-<span class="fc" id="L217">        ganadores = new ArrayList&lt;Participante&gt;(); /** limpio mi lista de ganadores*/</span>
-<span class="fc" id="L218">        String mensaje = &quot;Los ganadores del sorteo son: \n&quot;;</span>
-        
-<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        if (cantPremios &gt; participantes.size()) { /** Si la cantidad de premios es mas grande que los participantes le doy un premio a cada participante*/</span>
-<span class="nc bnc" id="L221" title="All 2 branches missed.">            for (int i = 0; i &lt; participantes.size(); i++) {</span>
-<span class="nc" id="L222">                ganadores.add(participantes.get(i));</span>
-<span class="nc" id="L223">                mensaje += participantes.get(i).getCliente().getNombre() + &quot; Contacto: &quot; + participantes.get(i).getCliente().getContacto() + &quot; \n&quot;;</span>
-<span class="nc" id="L224">                enviarMail(participantes.get(i));</span>
+<span class="fc" id="L283">        Respuesta respuesta = new Respuesta(-1, &quot;&quot;);</span>
+<span class="fc" id="L284">        Random rnd = new Random();</span>
+<span class="fc" id="L285">        ganadores = new ArrayList&lt;Participante&gt;();</span>
+        /**
+         * limpio mi lista de ganadores
+         */
+<span class="fc" id="L289">        String mensaje = &quot;Los ganadores del sorteo son: \n&quot;;</span>
+
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        if (cantPremios &gt; participantes.size()) {</span>
+            /**
+             * Si la cantidad de premios es mas grande que los participantes le
+             * doy un premio a cada participante
+             */
+<span class="fc bfc" id="L296" title="All 2 branches covered.">            for (int i = 0; i &lt; participantes.size(); i++) {</span>
+<span class="fc" id="L297">                ganadores.add(participantes.get(i));</span>
+<span class="fc" id="L298">                mensaje += participantes.get(i).getCliente().getNombre() + &quot; Contacto: &quot; + participantes.get(i).getCliente().getContacto() + &quot; \n&quot;;</span>
+<span class="fc" id="L299">                enviarMail(participantes.get(i));</span>
 
             }
-        } else { /** Sino, realizo el sorteo de los premios entre los participantes*/
-<span class="fc bfc" id="L228" title="All 2 branches covered.">            for (int i = 0; i &lt; cantPremios; i++) {</span>
-<span class="fc" id="L229">                int random = (int)(Math.random()*(participantes.size()-1)); /** genero un numero al azar entre 0 y el numero de participantes*/</span>
-<span class="fc" id="L230">                Participante ganador = participantes.get(random);</span>
-<span class="pc bpc" id="L231" title="1 of 2 branches missed.">                if (!ganadores.contains(ganador)) { /** si el participante sorteado aun no gano ningun premio lo agrego como ganador*/</span>
-<span class="fc" id="L232">                    ganadores.add(ganador);</span>
-<span class="fc" id="L233">                    mensaje += ganador.getCliente().getNombre() + &quot; Contacto: &quot; + ganador.getCliente().getContacto() + &quot; \n&quot;;</span>
-<span class="fc" id="L234">                    enviarMail(ganador);</span>
-                } else { /** si el partipante sorteado ya gano un premio entonces vuelvo a sortear*/
-<span class="nc" id="L236">                    i--;</span>
+        } else {
+            /**
+             * Sino, realizo el sorteo de los premios entre los participantes
+             */
+<span class="fc bfc" id="L306" title="All 2 branches covered.">            for (int i = 0; i &lt; cantPremios; i++) {</span>
+<span class="fc" id="L307">                int random = (int) (Math.random() * (participantes.size() - 1));</span>
+                /**
+                 * genero un numero al azar entre 0 y el numero de participantes
+                 */
+<span class="fc" id="L311">                Participante ganador = participantes.get(random);</span>
+<span class="fc bfc" id="L312" title="All 2 branches covered.">                if (!ganadores.contains(ganador)) {</span>
+                    /**
+                     * si el participante sorteado aun no gano ningun premio lo
+                     * agrego como ganador
+                     */
+<span class="fc" id="L317">                    ganadores.add(ganador);</span>
+<span class="fc" id="L318">                    mensaje += ganador.getCliente().getNombre() + &quot; Contacto: &quot; + ganador.getCliente().getContacto() + &quot; \n&quot;;</span>
+<span class="fc" id="L319">                    enviarMail(ganador);</span>
+                } else {
+                    /**
+                     * si el partipante sorteado ya gano un premio entonces
+                     * vuelvo a sortear
+                     */
+<span class="fc" id="L325">                    i--;</span>
                 }
             }
         }
-<span class="fc" id="L240">        System.out.println(cantPremios+&quot; &quot;+participantes.size());</span>
-<span class="fc" id="L241">        respuesta.setCod(0);</span>
-<span class="fc" id="L242">        respuesta.setRespuesta(mensaje+cantPremios+&quot; &quot;+participantes.size());</span>
+<span class="fc" id="L329">        System.out.println(cantPremios + &quot; &quot; + participantes.size());</span>
+<span class="fc" id="L330">        respuesta.setCod(0);</span>
+<span class="fc" id="L331">        respuesta.setRespuesta(mensaje + cantPremios + &quot; &quot; + participantes.size());</span>
 
-<span class="fc" id="L244">        return respuesta;</span>
+<span class="fc" id="L333">        return respuesta;</span>
 
     }
 

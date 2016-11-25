@@ -5,12 +5,13 @@
  */
 package clases;
 
+import gonzalezabreu.dominio.Ficha;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -27,6 +28,7 @@ public class FichaTest {
     
     @AfterClass
     public static void tearDownClass() {
+
     }
     
     @Before
@@ -41,7 +43,18 @@ public class FichaTest {
      * Test of getNombre method, of class Ficha.
      */
     @Test
-    public void testGetYSetNombre() {
+    public void testGetNombre() {
+        String nombre="NombrePrueba";
+        Ficha instance = new Ficha();
+        instance.setNombre(nombre);
+        String expResult = nombre;
+        String result = instance.getNombre();
+        assertEquals(expResult, result);
+
+    }
+
+     @Test
+    public void testSetNombre() {
         String nombre="NombrePrueba";
         Ficha instance = new Ficha();
         instance.setNombre(nombre);
@@ -52,12 +65,11 @@ public class FichaTest {
     }
 
 
-
     /**
      * Test of getDireccion method, of class Ficha.
      */
     @Test
-    public void testGetYSetDireccion() {
+    public void testGetDireccion() {
         String direccion="PruebaDireccion";
         Ficha instance = new Ficha();
         String expResult = direccion;
@@ -67,13 +79,31 @@ public class FichaTest {
 
     }
 
-
-
-    /**
-     * Test of getHorario method, of class Ficha.
-     */
     @Test
-    public void testGetYSetHorario() {
+    public void testSetDireccion() {
+        String direccion="PruebaDireccion";
+        Ficha instance = new Ficha();
+        String expResult = direccion;
+        instance.setDireccion(direccion);
+        String result = instance.getDireccion();
+        assertEquals(expResult, result);
+
+    }
+
+  
+    @Test
+    public void testSetHorario() {
+        String horario="PruebaHorario";
+        Ficha instance = new Ficha();
+        String expResult = horario;
+        instance.setHorario(horario);
+        String result = instance.getHorario();
+        assertEquals(expResult, result);
+       
+    }
+    
+        @Test
+    public void testGetHorario() {
         String horario="PruebaHorario";
         Ficha instance = new Ficha();
         String expResult = horario;
@@ -88,7 +118,18 @@ public class FichaTest {
      * Test of getTipoComida method, of class Ficha.
      */
     @Test
-    public void testGetYSetTipoComida() {
+    public void testGetTipoComida() {
+        String tipoComida="PruebaTipoComida";
+        Ficha instance = new Ficha();
+        instance.setTipoComida(tipoComida);
+        String expResult = tipoComida;
+        String result = instance.getTipoComida();
+        assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testSetYSetTipoComida() {
         String tipoComida="PruebaTipoComida";
         Ficha instance = new Ficha();
         instance.setTipoComida(tipoComida);

@@ -1,17 +1,18 @@
-
 package sistema;
 
-import clases.Cliente;
-import clases.Evaluacion;
-import clases.Participante;
-import clases.Respuesta;
+import gonzalezabreu.dominio.Cliente;
+import gonzalezabreu.dominio.Evaluacion;
+import gonzalezabreu.dominio.Ficha;
+import gonzalezabreu.dominio.Participante;
+import gonzalezabreu.dominio.Respuesta;
+import gonzalezabreu.sistema.Sistema;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -109,7 +110,7 @@ public class SistemaTest {
         System.out.println(result.getRespuesta());
         assertEquals(expResult, result.getCod());
     }
-   
+
     @Test
     public void testAgregarEvaluacionIdentificadaRespuestaOK() {
 
@@ -130,6 +131,26 @@ public class SistemaTest {
     }
 
         @Test
+    public void testAgregarEvaluacionIdentificadaClienteNoExiste() {
+
+        Sistema instance = new Sistema();
+        String nombre = "NombreCliente";
+        String documento = "DocumentoCliente";
+        String contacto = "ContactoCliente";
+        String email = "EmailCliente@mail";
+        int estrellas = 3;
+        String comentarios = "ComentarioPrueba";
+
+        Cliente cliente = new Cliente(nombre, documento, contacto, email);
+        
+
+        int expResult = -1;
+        Respuesta result = instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
+        assertEquals(expResult, result.getCod());
+    }
+
+    
+    @Test
     public void testAgregarEvaluacionIdentificadaComentarioVacioOK() {
 
         Sistema instance = new Sistema();
@@ -148,8 +169,8 @@ public class SistemaTest {
         assertEquals(expResult, result.getCod());
 
     }
-    
-            @Test
+
+    @Test
     public void testAgregarEvaluacionIdentificadaComentarioVacioVerificoParticipantes() {
 
         Sistema instance = new Sistema();
@@ -164,13 +185,12 @@ public class SistemaTest {
         Participante participante = new Participante(cliente);
         instance.agregarCliente(nombre, documento, contacto, email);
 
-        
         instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
         ArrayList<Participante> result = instance.getParticipantes();
-        assert(!result.contains(participante));
+        assert (!result.contains(participante));
 
     }
-    
+
     @Test
     public void testAgregarEvaluacionIdentificadaDatosIncorrectos1() {
 
@@ -308,20 +328,7 @@ public class SistemaTest {
 
     }
 
-    @Test
-    public void testSetFicha() {
 
-        String nombre = "NombrePrueba";
-        String direccion = "DireccionPrueba";
-        String horario = "HorarioPrueba";
-        String tipoComida = "TipoComidaPrueba";
-        Sistema instance = new Sistema();
-        int expResult = 0;
-        Respuesta result = instance.setFicha(nombre, direccion, horario, tipoComida);
-        assertEquals(expResult, result.getCod());
-        // TODO review the generated test code and remove the default call to fail.
-
-    }
 
     @Test
     public void testDifinirSorteoOK() {
@@ -396,10 +403,13 @@ public class SistemaTest {
         int cantidadPremios = 1;
         String mensaje = "MensajePrueba";
         Sistema instance = new Sistema();
+        instance.setCantPremios(cantidadPremios);
+        instance.setMensajeGanador(mensaje);
         int expResult = 0;
         Cliente cliente = new Cliente(nombre, documento, contacto, email);
-        instance.definirSorteo(cantidadPremios, mensaje);
-        System.out.println("Voy a sortear "+instance.getCantPremios());
+        instance.setCantPremios(cantidadPremios);
+        instance.setMensajeGanador(mensaje);
+
         instance.agregarCliente(nombre, documento, contacto, email);
         instance.agregarEvaluacionIdentificada(cliente, estrellas, comentarios);
         Respuesta result = instance.sortear();
@@ -439,7 +449,8 @@ public class SistemaTest {
             instance.agregarCliente("Nombre" + i, "Documento" + i, "Contacto" + i, "Fede_12990@hotmail.com" + i);
             instance.agregarEvaluacionIdentificada(cliente, i, "Comentario" + i);
         }
-        instance.definirSorteo(cantidadPremios, mensaje);
+        instance.setCantPremios(cantidadPremios);
+        instance.setMensajeGanador(mensaje);
         Respuesta result = instance.sortear();
         int expResult = 0;
 
@@ -447,4 +458,33 @@ public class SistemaTest {
 
     }
 
+     @Test
+    public void testGetFicha() {
+        String nombre="NombrePrueba";
+        String direccion="DireccionPrueba";
+        String horario="HorarioPrueba";
+        String tipoComida="TipoComidaPrueba";
+        Ficha ficha = new Ficha(nombre, direccion, horario, tipoComida);
+        Sistema instance= new Sistema();
+        instance.setFicha(nombre, direccion, horario, tipoComida);
+        Ficha result = instance.getFicha();
+        assertEquals(ficha, result);
+
+    }
+    
+     @Test
+    public void testSetFicha() {
+        String nombre="NombrePrueba";
+        String direccion="DireccionPrueba";
+        String horario="HorarioPrueba";
+        String tipoComida="TipoComidaPrueba";
+        Ficha ficha = new Ficha(nombre, direccion, horario, tipoComida);
+        Sistema instance= new Sistema();
+        instance.setFicha(nombre, direccion, horario, tipoComida);
+        Ficha result = instance.getFicha();
+        assertEquals(ficha, result);
+
+    }
+    
+    
 }
